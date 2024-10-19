@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 
 interface Appointment {
   name: string;
+  phone: string;
   date: string;
   time: string;
   service: string;
@@ -37,8 +38,8 @@ function App() {
             {darkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
         </div>
-        <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-          <h1 className="text-3xl font-bold mb-6 text-center">Barbershop Appointments</h1>
+        <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md ${darkMode ? 'text-black' : 'text-gray-800'}`}>
+          <h1 className="text-3xl font-bold mb-6 text-center">Reservar una cita</h1>
           <AppointmentForm onSubmit={handleAppointmentSubmit} darkMode={darkMode} />
           <AppointmentList appointments={appointments} darkMode={darkMode} />
         </div>
