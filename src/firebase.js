@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where,doc, getDoc, setDoc, increment } from "firebase/firestore"; 
+import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, query, where,doc, getDoc, setDoc, increment } from "firebase/firestore"; 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -83,10 +83,10 @@ const getNextId = async () => {
 };
 
 // Función para crear un nuevo documento con el ID auto-incremental
-export const createItemId = async (data) => {
+export const createItemId = async (name,data) => {
   try {
     const nextId = await getNextId(); // Obtén el próximo ID
-    const docRef = await setDoc(doc(db, "items", nextId.toString()), data); // Crea el documento con el ID
+    const docRef = await setDoc(doc(db, name, nextId.toString()), data); // Crea el documento con el ID
     console.log("Document written with ID: ", nextId);
   } catch (e) {
     console.error("Error adding document: ", e);
