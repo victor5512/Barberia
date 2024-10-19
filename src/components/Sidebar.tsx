@@ -15,10 +15,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar, darkMode }) =>
   } transition-transform duration-300 ease-in-out z-30`;
 
   const menuItems = [
-    { icon: <PieChart size={20} />, text: 'Dashboard' },
-    { icon: <Scissors size={20} />, text: 'Services' },
-    { icon: <Calendar size={20} />, text: 'Appointments' },
-    { icon: <Users size={20} />, text: 'Clients' },
+    { icon: <PieChart size={20} />, text: 'Citas' },
+    { icon: <Scissors size={20} />, text: 'Servivios' },
+    { icon: <Calendar size={20} />, text: 'Reservaciones' },
+    { icon: <Users size={20} />, text: 'Clientes' },
   ];
 
   return (

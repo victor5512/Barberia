@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Scissors, User } from 'lucide-react';
+// @ts-ignore
+import { createItem, readItems, createItemId } from '../firebase';
 
 interface AppointmentFormProps {
   onSubmit: (appointment: { name: string; date: string; time: string; service: string }) => void;
@@ -14,11 +16,13 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({ onSubmit, darkMode })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    let datos ={name, date, time, service};
     onSubmit({ name, date, time, service });
     setName('');
     setDate('');
     setTime('');
     setService('');
+    createItemId(datos)
   };
 
   const inputClass = `w-full pl-10 pr-4 py-2 border ${darkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400`;
