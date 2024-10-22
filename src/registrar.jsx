@@ -14,12 +14,9 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
-import registro from './registrar';
-import { useState } from "react";
 
-export default function Login() {
+export default function Registrar() {
   const defaultTheme = createTheme();
-  const [activo, setActivo] = useState('false')
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -49,15 +46,45 @@ export default function Login() {
               src={acceso} 
             />
             <Typography component="h1" variant="h5">
-              Inicio de Sesión
+              Registrar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1}}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
+                id="phone"
+                label="Telefono"
+                name="phone"
+                type="number"
+                autoComplete="phone"
+                autoFocus
+                sx={{
+                    '& .MuiInputLabel-root': {
+                      color: 'black', // Color de la etiqueta
+                    },
+                    '& .MuiInputBase-input': {
+                      color: 'black', // Color del texto
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'black', // Color del borde del campo
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'black', // Color del borde al pasar el ratón
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'black', // Color del borde cuando el campo está enfocado
+                      },
+                    },
+                  }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 id="email"
-                label="Correo Electronico"
+                label="Correo electronico"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -110,24 +137,19 @@ export default function Login() {
                     },
                   }}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" sx={{color:'black','&.Mui-checked': {
-          color: 'black',
-        },}} />}
-                label="Recordarme"
-              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 ,bgcolor:"black"}}
               >
-                Iniciar Sesión
+                Registrarse
               </Button>
               <Grid container>
+                
                 <Grid item>
-                  <Link href='./registro' variant="body2" sx={{color:'black'}}>
-                    {"No tengo una cuenta? Crear una"}
+                  <Link href="/Login" variant="body2" sx={{color:'black'}}>
+                    {"Iniciar sesion"}
                   </Link>
                 </Grid>
               </Grid>

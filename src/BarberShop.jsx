@@ -168,9 +168,9 @@ export default function BarberShop() {
   const goToCalendar = () => {
     navigate("/Calendar"); // Navega a la página del calendario
   };
-  const goToStore = () => {
-    navigate("/Store"); //navega a pagina de tienda
-  };
+  // const goToStore = () => {
+  //   navigate("/Store"); //navega a pagina de tienda
+  // };
   const goToLogin = () => {
     navigate("/Login");
   };
@@ -215,14 +215,14 @@ export default function BarberShop() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <StyledIconButton
+      {/* <StyledIconButton
         size="large"
         aria-label="tienda"
         color="inherit"
         onClick={goToStore}
       >
         <StorefrontIcon sx={{ fontSize: 40 }} />
-      </StyledIconButton>
+      </StyledIconButton> */}
       <StyledIconButton
         size="large"
         aria-label="calendario"
@@ -275,14 +275,14 @@ export default function BarberShop() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <StyledIconButton
+            {/* <StyledIconButton
               size="large"
               aria-label="tienda"
               color="inherit"
               onClick={goToStore}
             >
               <StorefrontIcon />
-            </StyledIconButton>
+            </StyledIconButton> */}
             <StyledIconButton
               size="large"
               aria-label="calendario"

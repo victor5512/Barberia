@@ -4,6 +4,7 @@ import CalendarPage from "./CalendarPage.jsx";
 import BarberShop from "./BarberShop.jsx";
 import Store from "./store.jsx";
 import Sesion from "./login.jsx";
+import Registro from "./registrar.jsx";
 import Cortespelo from "./Cortespelo.jsx"; 
 import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/Calendar" element={<CalendarPage />}/>
         <Route path="/Store" element={<Store/>} />
         <Route path="/Login"element={<Sesion/>} />
+        <Route path="/registro"element={<Registro/>} />
         {/* rutas servicios */}
         <Route path="/service/corte-de-pelo" element={<Cortespelo />} /> {/* Ruta de servicio 1 Corte de Pelo */}
         <Route path="/service/coloracion" element={<Coloracion />} />
