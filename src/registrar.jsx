@@ -7,9 +7,9 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Snackbar from "@mui/material/Snackbar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
@@ -17,18 +17,16 @@ import { createItem } from "./firebase";
 
 export default function Registrar() {
   const defaultTheme = createTheme();
-  const [snackbarMessage, setSnackbarMessage] = React.useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
-  const [open, setOpen] = React.useState(false);
-  
-  // Estado para almacenar los datos del formulario
+
   const [formData, setFormData] = React.useState({
     phone: "",
     email: "",
     password: ""
   });
+  const [open, setOpen] = React.useState(false); // Estado para el Snackbar
+  const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
 
-  // Maneja los cambios en los campos de texto
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -37,7 +35,6 @@ export default function Registrar() {
     }));
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -51,6 +48,13 @@ export default function Registrar() {
       setSnackbarSeverity("error");
       setOpen(true);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
@@ -164,6 +168,16 @@ export default function Registrar() {
           </Box>
         </Grid>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }

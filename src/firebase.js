@@ -57,13 +57,21 @@ export const deleteItem = async (id) => {
     }
 };
 
-export const filterItemsByPrice = async (minPrice) => {
-    const q = query(collection(db, "items"), where("price", ">=", minPrice));
-    const querySnapshot = await getDocs(q);
+export const loginAcc = async (usuario, pass) => {
+  const q = query(
+    collection(db, "Login"),
+    where("email"||"phone", "==", usuario),
+    where("password", "==", pass)
+  );
+
+  const querySnapshot = await getDocs(q);
   
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} =>`, doc.data());
-    });
+  if (!querySnapshot.empty) {
+    const user = querySnapshot.docs[0].data();
+    return user; // Si las credenciales son correctas, devuelve el usuario
+  } else {
+    return null; // Si no hay coincidencias, devuelve null
+  }
 };
 
 const getNextId = async () => {
