@@ -3,20 +3,56 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Snackbar from "@mui/material/Snackbar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
+import { createItem } from "./firebase";
 
 export default function Registrar() {
   const defaultTheme = createTheme();
+  const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
+  const [open, setOpen] = React.useState(false);
+  
+  // Estado para almacenar los datos del formulario
+  const [formData, setFormData] = React.useState({
+    phone: "",
+    email: "",
+    password: ""
+  });
+
+  // Maneja los cambios en los campos de texto
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  // Maneja el envío del formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createItem(formData, "Login");
+      setSnackbarMessage("Usuario registrado exitosamente");
+      setSnackbarSeverity("success");
+      setOpen(true);
+    } catch (error) {
+      console.error("Error al registrar el usuario:", error);
+      setSnackbarMessage("Hubo un error al registrar el usuario");
+      setSnackbarSeverity("error");
+      setOpen(true);
+    }
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -24,7 +60,6 @@ export default function Registrar() {
         <Grid
           item
           xs={false}
-          //   sm={5}
           md={7}
           sx={{
             backgroundImage: `url(${fondosesion})`,
@@ -42,13 +77,11 @@ export default function Registrar() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1 }}
-              src={acceso} 
-            />
+            <Avatar sx={{ m: 1 }} src={acceso} />
             <Typography component="h1" variant="h5">
               Registrar
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1}}>
+            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -59,25 +92,17 @@ export default function Registrar() {
                 type="number"
                 autoComplete="phone"
                 autoFocus
+                value={formData.phone}
+                onChange={handleChange}
                 sx={{
-                    '& .MuiInputLabel-root': {
-                      color: 'black', // Color de la etiqueta
-                    },
-                    '& .MuiInputBase-input': {
-                      color: 'black', // Color del texto
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'black', // Color del borde del campo
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'black', // Color del borde al pasar el ratón
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'black', // Color del borde cuando el campo está enfocado
-                      },
-                    },
-                  }}
+                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputBase-input': { color: 'black' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'black' },
+                    '&:hover fieldset': { borderColor: 'black' },
+                    '&.Mui-focused fieldset': { borderColor: 'black' },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -87,26 +112,17 @@ export default function Registrar() {
                 label="Correo electronico"
                 name="email"
                 autoComplete="email"
-                autoFocus
+                value={formData.email}
+                onChange={handleChange}
                 sx={{
-                    '& .MuiInputLabel-root': {
-                      color: 'black', // Color de la etiqueta
-                    },
-                    '& .MuiInputBase-input': {
-                      color: 'black', // Color del texto
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'black', // Color del borde del campo
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'black', // Color del borde al pasar el ratón
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'black', // Color del borde cuando el campo está enfocado
-                      },
-                    },
-                  }}
+                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputBase-input': { color: 'black' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'black' },
+                    '&:hover fieldset': { borderColor: 'black' },
+                    '&.Mui-focused fieldset': { borderColor: 'black' },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -117,39 +133,30 @@ export default function Registrar() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={formData.password}
+                onChange={handleChange}
                 sx={{
-                    '& .MuiInputLabel-root': {
-                      color: 'black', // Color de la etiqueta
-                    },
-                    '& .MuiInputBase-input': {
-                      color: 'black', // Color del texto
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'black', // Color del borde del campo
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'black', // Color del borde al pasar el ratón
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'black', // Color del borde cuando el campo está enfocado
-                      },
-                    },
-                  }}
+                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputBase-input': { color: 'black' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'black' },
+                    '&:hover fieldset': { borderColor: 'black' },
+                    '&.Mui-focused fieldset': { borderColor: 'black' },
+                  },
+                }}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 ,bgcolor:"black"}}
+                sx={{ mt: 3, mb: 2, bgcolor: "black" }}
               >
                 Registrarse
               </Button>
               <Grid container>
-                
                 <Grid item>
-                  <Link href="/Login" variant="body2" sx={{color:'black'}}>
-                    {"Iniciar sesion"}
+                  <Link href="/Login" variant="body2" sx={{ color: 'black' }}>
+                    {"Iniciar sesión"}
                   </Link>
                 </Grid>
               </Grid>
