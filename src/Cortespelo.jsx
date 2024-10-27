@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTheme  } from './Context/ThemeContext.jsx'; // Asegúrate de que esta ruta sea correcta
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
 
@@ -42,8 +43,10 @@ const servicesData = [
 ];
 
 export default function CorteDePelo() {
+  const { darkMode } = useTheme();
+
   return (
-    <Box sx={{ padding: 4, textAlign: "center" }}>
+    <Box sx={{ padding: 4, textAlign: "center", backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#000', minHeight: '100vh' }}>
       {/* Título */}
       <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}>
         Corte de Pelo

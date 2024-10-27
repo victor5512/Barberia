@@ -10,10 +10,12 @@ import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
 import Tratamiento from "./Tratamiento.jsx";
+import { ThemeProvider   } from "./Context/ThemeContext.jsx";
 // import Mascarilla from "./Mascarilla.jsx";
 
 export default function App() {
   return (
+    <ThemeProvider >
       <Routes>
         <Route path="/" element={<BarberShop />} />  {/* Ruta principal */}
         <Route path="/Calendar" element={<CalendarPage />}/>
@@ -28,5 +30,7 @@ export default function App() {
       <Route path="/service/tratamiento-capilar" element={<Tratamiento />} />
      {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
       </Routes>
+      </ThemeProvider >
+
   );
 }
