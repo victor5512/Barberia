@@ -15,9 +15,11 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom"; // Para la navegación
-import { loginAcc } from "./firebase"; // El método para autenticación
+import { loginAcc } from "./servicios/firebase";
+import { loginUser, signInWithGoogle } from "./servicios/login"; // El método para autenticación
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
+import GoogleIcon from '@mui/icons-material/Google';
 
 export default function Login() {
   const defaultTheme = createTheme();
@@ -26,7 +28,7 @@ export default function Login() {
   // Estados para los inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   // Estado para manejar el Snackbar
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -37,11 +39,31 @@ export default function Login() {
     setOpenSnackbar(false);
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const us = await signInWithGoogle();
+      if (us.emailVerified) {
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Inicio de sesión exitoso");
+        setOpenSnackbar(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      } else {
+        setSnackbarSeverity("error");
+        setSnackbarMessage("Usuario o contraseña incorrectos");
+        setOpenSnackbar(true);
+      }
+    } catch (error) {
+      alert("Permite las ventanas emergentes para completar el inicio de sesión con Google.");
+    }
+  };
+
   // Método para manejar el inicio de sesión
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await loginAcc(email, password);
+      const user = await loginUser(email, password);
       if (user) {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
@@ -135,7 +157,7 @@ export default function Login() {
                 }}
               />
               <FormControlLabel
-                control={<Checkbox value="remember" sx={{color:'black','&.Mui-checked': {color: 'black'}}} />}
+                control={<Checkbox value="remember" sx={{ color: 'black', '&.Mui-checked': { color: 'black' } }} />}
                 label="Recordarme"
               />
               <Button
@@ -146,6 +168,24 @@ export default function Login() {
               >
                 Iniciar Sesión
               </Button>
+              <Button
+  fullWidth
+  variant="outlined"
+  onClick={handleGoogleSignIn}
+  startIcon={<GoogleIcon />}
+  sx={{
+    mt: 1,
+    mb: 2,
+    borderColor: "black",
+    color: "black",
+    "&:hover": {
+      backgroundColor: "#f1f1f1",
+      borderColor: "black",
+    },
+  }}
+>
+  Iniciar Sesión con Google
+</Button>
               <Grid container>
                 <Grid item>
                   <Link href="./registro" variant="body2" sx={{ color: 'black' }}>

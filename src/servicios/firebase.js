@@ -12,8 +12,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 
 export const createItem = async (data,colec) => {
     try {
@@ -75,27 +75,34 @@ export const loginAcc = async (usuario, pass) => {
 };
 
 const getNextId = async () => {
-  const counterDocRef = doc(db, "counters", "itemsCounter"); // Documento donde almacenarás el contador
+  try{
+  const counterDocRef = doc(db, "counters", "itemsCounter");
   const counterSnap = await getDoc(counterDocRef);
 
   if (!counterSnap.exists()) {
-    // Si el contador no existe, lo inicializas en 1
     await setDoc(counterDocRef, { count: 1 });
     return 1;
   } else {
-    // Si ya existe, lo incrementas
     const currentCount = counterSnap.data().count;
     await updateDoc(counterDocRef, { count: increment(1) });
     return currentCount + 1;
   }
+}catch (e) {
+  console.error("Error document: ", e);
+}
 };
 
-// Función para crear un nuevo documento con el ID auto-incremental
-export const createItemId = async (name,data) => {
+export const createItemId = async (name, data) => {
+  if (!name || typeof data !== 'object') {
+    console.error("Invalid parameters");
+    return;
+  }
+
   try {
-    const nextId = await getNextId(); // Obtén el próximo ID
-    const docRef = await setDoc(doc(db, name, nextId.toString()), data); // Crea el documento con el ID
+    const nextId = await getNextId();
+    await setDoc(doc(db, name, nextId.toString()), data);
     console.log("Document written with ID: ", nextId);
+    return nextId;
   } catch (e) {
     console.error("Error adding document: ", e);
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Scissors, User } from 'lucide-react';
 // @ts-ignore
-import { createItem, readItems, createItemId } from '../firebase';
+import { createItem, readItems, createItemId } from '../servicios/firebase';
 
 interface AppointmentFormProps {
   onSubmit: (appointment: { name: string; phone: string; date: string; time: string; service: string }) => void;

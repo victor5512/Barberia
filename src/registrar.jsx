@@ -13,7 +13,9 @@ import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
-import { createItem } from "./firebase";
+import { createItem } from "./servicios/firebase";
+import { registerUser } from "./servicios/login"
+
 
 export default function Registrar() {
   const defaultTheme = createTheme();
@@ -38,7 +40,7 @@ export default function Registrar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createItem(formData, "Login");
+      await registerUser(formData.email, formData.password);
       setSnackbarMessage("Usuario registrado exitosamente");
       setSnackbarSeverity("success");
       setOpen(true);
