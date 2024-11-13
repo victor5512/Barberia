@@ -20,7 +20,7 @@ import { loginUser, signInWithGoogle } from "./servicios/login"; // El método p
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
 import GoogleIcon from '@mui/icons-material/Google';
-import { AppProvider } from './Context/appContext.jsx';
+import { useAppContext } from './Context/appContext';
 
 export default function Login() {
   const defaultTheme = createTheme()
@@ -49,8 +49,8 @@ export default function Login() {
         setSnackbarMessage("Inicio de sesión exitoso");
         setOpenSnackbar(true);
         dispatch({
-          type: 'SET_USER',
-          payload: { name: 'John Doe', email: 'john@example.com' },
+          type: 'SET_USER_DATA',
+          payload: { user: us.displayName, email: us.email, phone: us.phoneNumber },
         });
         setTimeout(() => {
           navigate("/");
@@ -74,6 +74,10 @@ export default function Login() {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
         setOpenSnackbar(true);
+        dispatch({
+          type: 'SET_USER_DATA',
+          payload: { name: "", email: email, phone: "" },
+        });
         // Redirigir a la página principal
         setTimeout(() => {
           navigate("/");

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTheme  } from './Context/ThemeContext.jsx'; // Asegúrate de que esta ruta sea correcta
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import { useAppContext } from './Context/appContext';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -44,7 +45,9 @@ const servicesData = [
 
 export default function CorteDePelo() {
   const { darkMode } = useTheme();
+  const { state, dispatch } = useAppContext();;
 
+  console.log("aaaaaaaaaaaaaaaaaaaa",state)
   return (
     <Box sx={{ padding: 4, textAlign: "center", backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#000', minHeight: '100vh' }}>
       {/* Título */}
