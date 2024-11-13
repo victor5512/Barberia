@@ -10,8 +10,9 @@ import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
 import Tratamiento from "./Tratamiento.jsx";
-import { ThemeProvider } from "./Context/ThemeContext.jsx";
-
+// @ts-ignore
+import Citas from "./Cita.tsx"
+import { ThemeProvider   } from "./Context/ThemeContext.jsx";
 // import Mascarilla from "./Mascarilla.jsx";
 
 export default function App() {
@@ -27,13 +28,11 @@ export default function App() {
         <Route path="/service/corte-de-pelo" element={<Cortespelo />} />{" "}
         {/* Ruta de servicio 1 Corte de Pelo */}
         <Route path="/service/coloracion" element={<Coloracion />} />
-        <Route path="/service/arreglo-de-barba" element={<Arreglobarba />} />
-        <Route
-          path="/service/grecas-y-corte-de-cejas"
-          element={<GrecasCejas />}
-        />
-        <Route path="/service/tratamiento-capilar" element={<Tratamiento />} />
-        {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
+      <Route path="/service/arreglo-de-barba" element={<Arreglobarba />} />
+      <Route path="/service/grecas-y-corte-de-cejas" element={<GrecasCejas />} />
+      <Route path="/service/tratamiento-capilar" element={<Tratamiento />} />
+      <Route path="/citas" element={<Citas />} />
+     {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
       </Routes>
     </ThemeProvider>
   );

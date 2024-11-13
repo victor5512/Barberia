@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,17 +10,81 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom"; // Para la navegación
+import { loginAcc } from "./servicios/firebase";
+import { loginUser, signInWithGoogle } from "./servicios/login"; // El método para autenticación
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
-import registro from './registrar';
-import { useState } from "react";
+import GoogleIcon from '@mui/icons-material/Google';
 
 export default function Login() {
   const defaultTheme = createTheme();
-  const [activo, setActivo] = useState('false')
+  const navigate = useNavigate();
+
+  // Estados para los inputs
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Estado para manejar el Snackbar
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("error");
+
+  // Manejar el cierre del Snackbar
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const us = await signInWithGoogle();
+      if (us.emailVerified) {
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Inicio de sesión exitoso");
+        setOpenSnackbar(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      } else {
+        setSnackbarSeverity("error");
+        setSnackbarMessage("Usuario o contraseña incorrectos");
+        setOpenSnackbar(true);
+      }
+    } catch (error) {
+      alert("Permite las ventanas emergentes para completar el inicio de sesión con Google.");
+    }
+  };
+
+  // Método para manejar el inicio de sesión
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await loginUser(email, password);
+      if (user) {
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Inicio de sesión exitoso");
+        setOpenSnackbar(true);
+        // Redirigir a la página principal
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      } else {
+        setSnackbarSeverity("error");
+        setSnackbarMessage("Usuario o contraseña incorrectos");
+        setOpenSnackbar(true);
+      }
+    } catch (error) {
+      console.error("Error en el inicio de sesión:", error);
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Hubo un error al intentar iniciar sesión");
+      setOpenSnackbar(true);
+    }
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -27,7 +92,6 @@ export default function Login() {
         <Grid
           item
           xs={false}
-          //   sm={5}
           md={7}
           sx={{
             backgroundImage: `url(${fondosesion})`,
@@ -45,13 +109,11 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1 }}
-              src={acceso} 
-            />
+            <Avatar sx={{ m: 1 }} src={acceso} />
             <Typography component="h1" variant="h5">
               Inicio de Sesión
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1}}>
+            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -61,25 +123,17 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 sx={{
-                    '& .MuiInputLabel-root': {
-                      color: 'black', // Color de la etiqueta
-                    },
-                    '& .MuiInputBase-input': {
-                      color: 'black', // Color del texto
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'black', // Color del borde del campo
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'black', // Color del borde al pasar el ratón
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'black', // Color del borde cuando el campo está enfocado
-                      },
-                    },
-                  }}
+                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputBase-input': { color: 'black' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'black' },
+                    '&:hover fieldset': { borderColor: 'black' },
+                    '&.Mui-focused fieldset': { borderColor: 'black' },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -90,43 +144,51 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 sx={{
-                    '& .MuiInputLabel-root': {
-                      color: 'black', // Color de la etiqueta
-                    },
-                    '& .MuiInputBase-input': {
-                      color: 'black', // Color del texto
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'black', // Color del borde del campo
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'black', // Color del borde al pasar el ratón
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'black', // Color del borde cuando el campo está enfocado
-                      },
-                    },
-                  }}
+                  '& .MuiInputLabel-root': { color: 'black' },
+                  '& .MuiInputBase-input': { color: 'black' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'black' },
+                    '&:hover fieldset': { borderColor: 'black' },
+                    '&.Mui-focused fieldset': { borderColor: 'black' },
+                  },
+                }}
               />
               <FormControlLabel
-                control={<Checkbox value="remember" sx={{color:'black','&.Mui-checked': {
-          color: 'black',
-        },}} />}
+                control={<Checkbox value="remember" sx={{ color: 'black', '&.Mui-checked': { color: 'black' } }} />}
                 label="Recordarme"
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 ,bgcolor:"black"}}
+                sx={{ mt: 3, mb: 2, bgcolor: "black" }}
               >
                 Iniciar Sesión
               </Button>
+              <Button
+  fullWidth
+  variant="outlined"
+  onClick={handleGoogleSignIn}
+  startIcon={<GoogleIcon />}
+  sx={{
+    mt: 1,
+    mb: 2,
+    borderColor: "black",
+    color: "black",
+    "&:hover": {
+      backgroundColor: "#f1f1f1",
+      borderColor: "black",
+    },
+  }}
+>
+  Iniciar Sesión con Google
+</Button>
               <Grid container>
                 <Grid item>
-                  <Link href='./registro' variant="body2" sx={{color:'black'}}>
+                  <Link href="./registro" variant="body2" sx={{ color: 'black' }}>
                     {"No tengo una cuenta? Crear una"}
                   </Link>
                 </Grid>
@@ -135,6 +197,16 @@ export default function Login() {
           </Box>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
