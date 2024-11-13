@@ -1,16 +1,8 @@
 import * as React from "react";
 import { useTheme } from "./Context/ThemeContext.jsx"; // Asegúrate de que esta ruta sea correcta
 import { styled } from "@mui/material/styles";
-
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import { useAppContext } from './Context/appContext';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -43,7 +35,9 @@ export default function CorteDePelo() {
   React.useEffect(() => {
     document.body.style.backgroundColor = darkMode ? "#333" : "#fff";
   }, [darkMode]);
+  const { state, dispatch } = useAppContext();;
 
+  console.log("aaaaaaaaaaaaaaaaaaaa",state)
   return (
     <Box
       sx={{
