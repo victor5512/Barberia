@@ -132,43 +132,6 @@ const servicesData = [
     imageUrl: "../src/img/imgpage/mascarilla.jpg", // Cambia esto a la ruta de tu imagen
   },
 ];
-//************************************************************* SEPARACION DE PRUEBA
-// {
-//   title: "Servicio 1",
-//   description: "Corte de Pelo.",
-//   price: "MX$0",
-//   imageUrl: "../src/img/fondo_inicial.jpg", // Cambia esto a la ruta de tu imagen
-// },
-// {
-//   title: "Servicio 2",
-//   description: "Descripción del servicio 2.",
-//   price: "MX$0",
-//   imageUrl: "../src/img/fondo_inicial.jpg", // Cambia esto a la ruta de tu imagen
-// },
-// {
-//   title: "Servicio 3",
-//   description: "Descripción del servicio 3.",
-//   price: "MX$0",
-//   imageUrl: "../src/img/fondo_inicial.jpg", // Cambia esto a la ruta de tu imagen
-// },
-// {
-//   title: "Servicio 4",
-//   description: "Descripción del servicio 4.",
-//   price: "MX$0",
-//   imageUrl: "../src/img/fondo_inicial.jpg", // Cambia esto a la ruta de tu imagen
-// },
-// {
-//   title: "Servicio 5",
-//   description: "Descripción del servicio 5.",
-//   price: "MX$0",
-//   imageUrl: "path/to/image5.jpg", // Cambia esto a la ruta de tu imagen
-// },
-// {
-//   title: "Servicio 6",
-//   description: "Descripción del servicio 6.",
-//   price: "MX$0",
-//   imageUrl: "path/to/image6.jpg", // Cambia esto a la ruta de tu imagen
-// },
 
 export default function BarberShop() {
   const navigate = useNavigate();
@@ -226,9 +189,6 @@ export default function BarberShop() {
       navigate(`/service/tratamiento-capilar`);
     }
 
-    // else(){
-
-    // }
   };
   // Función para abrir y cerrar el Drawer
   const toggleDrawer = (open) => () => {
@@ -237,32 +197,8 @@ export default function BarberShop() {
 
   // Renderiza los iconos en el Drawer
   const renderDrawer = () => (
-    <Box
-      sx={{
-        width: 140,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: 3,
-      }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      {/* <StyledIconButton
-        size="large"
-        aria-label="tienda"
-        color="inherit"
-        onClick={goToStore}
-      >
-        <StorefrontIcon sx={{ fontSize: 40 }} />
-      </StyledIconButton> */}
-      <StyledIconButton
-        size="large"
-        aria-label="calendario"
-        color="inherit"
-        onClick={goToCalendar}
-      >
+    <Box  sx={{ width: 140,display: "flex",flexDirection: "column",alignItems: "center",padding: 3}} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+      <StyledIconButton size="large" aria-label="calendario" color="inherit" onClick={goToCalendar}>
         <CalendarTodayIcon sx={{ fontSize: 40 }} />
       </StyledIconButton>
       <StyledIconButton
@@ -272,6 +208,10 @@ export default function BarberShop() {
         onClick={goToLogin}
       >
         <AccountCircle sx={{ fontSize: 40 }} />
+      </StyledIconButton>
+      
+      <StyledIconButton size="large" aria-label="account of current users" color="inherit" onClick={toggleDarkMode}>
+      {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
       </StyledIconButton>
     </Box>
   );
@@ -311,14 +251,6 @@ export default function BarberShop() {
             </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {/* <StyledIconButton
-              size="large"
-              aria-label="tienda"
-              color="inherit"
-              onClick={goToStore}
-            >
-              <StorefrontIcon />
-            </StyledIconButton> */}
               <StyledIconButton
                 size="large"
                 aria-label="calendario"
@@ -354,8 +286,7 @@ export default function BarberShop() {
         <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
           {renderDrawer()} 
         </Drawer>
-      
-
+        
         <div
           style={{
             width: "100%",
