@@ -1,0 +1,7 @@
+/* Estilo para el ícono más grande */
+.large-icon {
+    width: 150px; /* Ajusta este valor según lo grande que quieras el icono */
+    height: 550px; /* Ajusta la altura también si es necesario */
+    display: block; /* Para que se muestre como bloque */
+    margin: 20px auto; /* Centrar el icono en la página */
+}
