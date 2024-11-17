@@ -1,67 +1,41 @@
-// ThemeContext.jsx
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
-export const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
-  const location = useLocation();
-  // const savedMode = localStorage.getItem("darkMode");
-  // return savedMode ? JSON.parse(savedMode) : false;
-  // const toggleDarkMode = () => {
-  //   setDarkMode((prevMode) => {
-  //     const newMode = !prevMode;
-  //     localStorage.setItem("darkMode", JSON.stringify(newMode));
-  //     console.log("Modo oscuro actualizado en localStorage:", newMode);
-  //     return newMode;
-  //   });
-  // };
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+export const DarkModeContext = createContext();
+
+export const DarkModeProvider = ({ children }) => {
+  const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
 
   useEffect(() => {
-    const applyDarkMode = () => {
-      const storedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
-      setDarkMode(storedDarkMode || false);
-      if (storedDarkMode){
-        document.body.classList.add('dark-mode');
-      }else {
-        document.body.classList.remove('dark-mode');
-      }
-      console.log('Modo oscuro activo:', storedDarkMode);  
-    };
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
 
-    
-    applyDarkMode();
-    const handleStorageChange = (event) => {
-      if (event.key === 'darkMode') {
-        applyDarkMode();
-      }
-    };
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [location]);
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+      primary: {
+        main: darkMode ? '#1a1a1a' : '#935116',
+      },
+      background: {
+        default: darkMode ? '#121212' : '#ffffff',
+      },
+    },
+  });
 
   const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', JSON.stringify(newDarkMode));  
-
-    if (newDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-
-    console.log('Modo oscuro activado:', newDarkMode); 
+    setDarkMode((prev) => !prev);
   };
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
-      {children}
-    </ThemeContext.Provider>
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      <ThemeProvider theme={theme}>
+        {children}
+      </ThemeProvider>
+    </DarkModeContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useDarkMode = () => useContext(DarkModeContext);

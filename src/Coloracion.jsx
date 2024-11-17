@@ -1,6 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -22,53 +23,70 @@ const AgendarButton = styled(Button)(({ theme }) => ({
 
 const servicesData = [
   {
-    title: "Servicio 1",
-    description: "Descripción del servicio 1",
-    price: "MX$0",
-    imageUrl: "path_to_image_1",
+    title: "Tinte Natural",
+    description: "Realza el color natural de tu cabello.",
+    price: "MX$350",
+    imageUrl: "/images/tinte-natural.jpg", // Ruta válida
   },
   {
-    title: "Servicio 2",
-    description: "Descripción del servicio 2",
-    price: "MX$0",
-    imageUrl: "path_to_image_2",
+    title: "Mechas",
+    description: "Agrega estilo con mechas personalizadas.",
+    price: "MX$450",
+    imageUrl: "/images/mechas.jpg", // Ruta válida
   },
   {
-    title: "Servicio 3",
-    description: "Descripción del servicio 3",
-    price: "MX$0",
-    imageUrl: "path_to_image_3",
+    title: "Decoloración",
+    description: "Transforma tu look con un nuevo tono.",
+    price: "MX$600",
+    imageUrl: "/images/decoloracion.jpg", // Ruta válida
   },
 ];
 
 export default function Coloracion() {
   return (
     <Box sx={{ padding: 4, textAlign: "center" }}>
-      {/* Título */}
-      <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}>
-        Coloracion de Pelo
+      {/* Título con ícono */}
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontFamily: "Rajdhani",
+          marginBottom: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ContentCutIcon sx={{ marginRight: 1, fontSize: 40, color: "#0aa6bc" }} />
+        Coloración de Pelos
       </Typography>
 
-      {/* Imagen */}
+      {/* Imagen principal */}
       <CardMedia
         component="img"
         height="300"
-        image="path_to_main_image" // Cambia por la ruta de tu imagen
-        alt="Coloracion de Pelo"
-        sx={{ maxWidth: "600px", margin: "auto" }}
+        image="/images/coloracion-principal.jpg" // Ruta válida
+        alt="Coloración de Pelo"
+        sx={{ maxWidth: "600px", margin: "auto", borderRadius: "8px" }}
       />
 
-      {/* Precio */}
-      <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
-        MX$0
+      {/* Precio general */}
+      <Typography
+        variant="h6"
+        sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}
+      >
+        Desde MX$350
       </Typography>
 
       {/* Botón Agendar Cita */}
-      <AgendarButton variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}>
+      <AgendarButton
+        variant="contained"
+        sx={{ marginTop: 3, padding: "10px 20px" }}
+      >
         Agendar Cita
       </AgendarButton>
 
-      {/* Cards debajo */}
+      {/* Cards de servicios */}
       <Box sx={{ marginTop: 6 }}>
         <Grid container spacing={4}>
           {servicesData.map((service, index) => (
@@ -87,7 +105,14 @@ export default function Coloracion() {
                   <Typography variant="body2" color="text.secondary">
                     {service.description}
                   </Typography>
-                  <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      marginTop: 2,
+                      fontFamily: "Rajdhani",
+                      color: "#0aa6bc",
+                    }}
+                  >
                     {service.price}
                   </Typography>
                 </CardContent>
@@ -99,3 +124,6 @@ export default function Coloracion() {
     </Box>
   );
 }
+
+
+
