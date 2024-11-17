@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   styled,
   alpha,
@@ -21,12 +21,12 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import fondo1 from "../src/img/fondo_inicial.jpg";
 import DarkModeIcon from "@mui/icons-material/Brightness2"; // Icono de luna
-import LightModeIcon from "@mui/icons-material/WbSunny"; // Icono de sol
-import serv1 from "../src/img/imgpage/serv1.jpg";
-import greca1 from "../src/img/imgpage/greca1.jpg";
-import coloracion from "../src/img/imgpage/coloracion.jpg";
-import cortebarba from "../src/img/imgpage/cortebarba.jpg";
+import LightModeIcon from "@mui/icons-material/WbSunny"; // Icono de sol;
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom"; // Importar Outlet para las rutas hijas
+// import {fondomader} from "./CalendarPage";
+import { useDarkMode } from "./Context/ThemeContext.jsx";  // Importar el hook
+
 import {
   Button,
   Card,
@@ -99,52 +99,50 @@ const servicesData = [
     title: "Servicio 1",
     description: "Corte de Pelo.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/serv1.jpg", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/serv1.jpg",
   },
   {
     title: "Servicio 2",
     description: "Coloración de cabello.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/coloracion.jpg", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/coloracion.jpg",
   },
   {
     title: "Servicio 3",
     description: "Arreglo de Barba.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/cortebarba.jpg", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/cortebarba.jpg",
   },
   {
     title: "Servicio 4",
     description: "Grecas y corte de cejas.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/greca1.jpg", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/greca1.jpg",
   },
   {
     title: "Servicio 5",
     description: "Tratamiento Capilar Personalizado.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/capilarpersonalizado.png", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/capilarpersonalizado.png",
   },
   {
     title: "Servicio 6",
     description: "Mascarilla.",
     price: "MX$0",
-    imageUrl: "../src/img/imgpage/mascarilla.jpg", // Cambia esto a la ruta de tu imagen
+    imageUrl: "../src/img/imgpage/mascarilla.jpg",
   },
 ];
 
 export default function BarberShop() {
+  const { darkMode, toggleDarkMode } = useDarkMode(); 
   const navigate = useNavigate();
-  const [drawerOpen, setDrawerOpen] = React.useState(false); // Estado para el Drawer ose eñ menu de hamburgesa
-  const storedDarkMode = localStorage.getItem("darkMode") === "true";
-  const [darkMode, setdarkMode] = React.useState(storedDarkMode);
 
   // Tema dinámico según el estado de `darkMode`
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
       primary: {
-        main: darkMode ? "#1a1a1a" : "#0aa6bc",
+        main: darkMode ? "#1a1a1a" : "#935116",
       },
       background: {
         default: darkMode ? "#121212" : "#ffffff",
@@ -157,11 +155,7 @@ export default function BarberShop() {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
-  // Alternar entre modo claro y oscuro
-  const toggleDarkMode = () => {
-    setdarkMode(!darkMode);
-  };
-
+  
   const goToCalendar = () => {
     navigate("/Calendar"); // Navega a la página del calendario
   };
@@ -188,111 +182,24 @@ export default function BarberShop() {
     if (service.description === "Tratamiento Capilar Personalizado.") {
       navigate(`/service/tratamiento-capilar`);
     }
-
-  };
-  // Función para abrir y cerrar el Drawer
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
   };
 
-  // Renderiza los iconos en el Drawer
-  const renderDrawer = () => (
-    <Box  sx={{ width: 140,display: "flex",flexDirection: "column",alignItems: "center",padding: 3}} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
-      <StyledIconButton size="large" aria-label="calendario" color="inherit" onClick={goToCalendar}>
-        <CalendarTodayIcon sx={{ fontSize: 40 }} />
-      </StyledIconButton>
-      <StyledIconButton
-        size="large"
-        aria-label="account of current user"
-        color="inherit"
-        onClick={goToLogin}
-      >
-        <AccountCircle sx={{ fontSize: 40 }} />
-      </StyledIconButton>
-      
-      <StyledIconButton size="large" aria-label="account of current users" color="inherit" onClick={toggleDarkMode}>
-      {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-      </StyledIconButton>
-    </Box>
-  );
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 ,backgroundColor: theme.palette.background.default, minHeight: "100vh" }}>
-        <AppBar position="fixed" sx={{ backgroundColor: theme.palette.primary.main }}>
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer(true)} // Abre el Drawer
-              sx={{ mr: 2, display: { xs: "block", md: "none" } }} // Solo en pantallas pequeñas
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            >
-              BarberShop
-            </Typography>
-
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Buscar…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <StyledIconButton
-                size="large"
-                aria-label="calendario"
-                color="inherit"
-                onClick={goToCalendar}
-              >
-                <CalendarTodayIcon />
-              </StyledIconButton>
-
-            {/* Botón para alternar entre modo claro y oscuro */}
-              <IconButton
-                size="large"
-                aria-label="toggle dark mode"
-                color="inherit"
-                onClick={toggleDarkMode}
-              >
-                {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-              </IconButton>
-
-              <StyledIconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                color="inherit"
-                onClick={goToLogin}
-              >
-                <AccountCircle />
-              </StyledIconButton>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        {/* Renderiza el Drawer con los iconos este es el bueno*/}
-        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-          {renderDrawer()} 
-        </Drawer>
-        
+      <Box
+        sx={{
+          flexGrow: 1,
+          backgroundColor: theme.palette.background.default,
+          minHeight: "100vh",
+     
+        }}
+      >
         <div
           style={{
             width: "100%",
             height: "auto",
             position: "relative",
-            backgroundColor: "0aa6bc",
           }}
         >
           <img
@@ -301,7 +208,6 @@ export default function BarberShop() {
               width: "100%",
               height: "auto",
               maxHeight: "350px",
-              backgroundColor: "0aa6bc",
               boxShadow: "5px 5px 3px rgba(0, 0, 0, 0.8)",
               objectFit: "cover", // Esto asegura que la imagen cubra el área sin distorsionarse
             }}
@@ -339,7 +245,7 @@ export default function BarberShop() {
                       sx={{
                         marginTop: 2,
                         fontFamily: "Rajdhani-600",
-                        color: "#0aa6bc",
+                        color: "#935116",
                       }}
                     >
                       {service.price}
