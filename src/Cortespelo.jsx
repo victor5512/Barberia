@@ -1,104 +1,228 @@
-
-// CorteDePelo.jsx
 import * as React from "react";
-import { useDarkMode } from './Context/ThemeContext'; // Actualiza la importación con el nombre correcto
+import { useDarkMode } from "./Context/ThemeContext";
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
-import { useAppContext } from './Context/appContext';
+import iconavaja from "./img/imgpage/iconavaja.gif";
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Grid,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Para la navegación
+
+const CardWrapper = styled("div")(() => ({
+  position: "relative",
+  "&:hover .hover-button": {
+    opacity: 1, // Muestra el botón
+  },
+  "&:hover .card-hover": {
+    transform: "translateY(-10px)", // Eleva la carta
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)", // Agrega sombra
+  },
+}));
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
   margin: "auto",
+  backgroundColor: theme.palette.mode === "dark" ? "#000000" : "#fafafa",
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
+  borderRadius: "16px",
+
+  overflow: "hidden",
   "&:hover": {
-    transform: "translateY(-10px)",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    transform: "translateY(-10px)", // Eleva la card al hacer hover
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)", // Sombra de la card
+  },
+  "&:hover .hover-button": {
+    opacity: 1, // Muestra el botón
+    transform: "translate(-50%, 0)", // Lo posiciona correctamente
   },
 }));
 
-const AgendarButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#0aa6bc",
+// Estilo para el botón
+const ButtonStyled = styled(Button)(({ theme }) => ({
+  position: "absolute",
+  top: "300px",
+  left: "50%", // Centrado horizontalmente
+  transform: "translateX(-50%)", // Ajuste para el centrado
+  width: "80%", // Ancho relativo para adaptarse a diferentes pantallas
+  maxWidth: "343px", // Límite máximo de ancho
+  height: "60px", // Altura más compacta
+  backgroundColor: "rgba(0, 0, 255, 0.4)", // Fondo semi-transparente azul
   color: "#fff",
-  "&:hover": {
-    backgroundColor: "#088ca3",
+  opacity: 0, // Oculto por defecto
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  transition: "opacity 0.3s ease", // Transición para suavizar la aparición
+  zIndex: 2, // Sobre el resto de elementos
+  cursor: "pointer",
+
+  // Ajustes responsivos para mantener consistencia
+  [theme.breakpoints.down("xs")]: {
+    top: "93%", // Ajuste en pantallas muy pequeñas
+    height: "50px",
+    fontSize: "0.8rem", // Texto más pequeño
+    width: "90%", // Más ancho en pantallas pequeñas
+  },
+  [theme.breakpoints.between("sm", "md")]: {
+    top: "91%", // Más abajo en pantallas medianas
+    height: "55px",
+    fontSize: "0.9rem",
+  },
+  [theme.breakpoints.up("md")]: {
+    top: "85%",
+    height: "60px",
+    fontSize: "1rem",
+  },
+  [theme.breakpoints.up("lg")]: {
+    top: "82%",
+    height: "70px",
+    fontSize: "1.2rem",
   },
 }));
 
-const servicesData = [
+const servicesDataVictor = [
   {
-    title: "Servicio 1",
-    description: "Descripción del servicio 1",
-    price: "MX$0",
-    imageUrl: "path_to_image_1",
+    title: "Corte Undercut",
+    description: "Es un corte audaz y moderno",
+    price: "MX$150",
+    imageUrl: "../src/img/imgpage/undercut.jpg",
   },
   {
-    title: "Servicio 2",
-    description: "Descripción del servicio 2",
-    price: "MX$0",
-    imageUrl: "path_to_image_2",
+    title: "Corte Fade",
+    description: "Es uno de los más populares",
+    price: "MX$250",
+    imageUrl: "../src/img/imgpage/fade.jpg",
   },
   {
-    title: "Servicio 3",
-    description: "Descripción del servicio 3",
-    price: "MX$0",
-    imageUrl: "path_to_image_3",
+    title: "Corte Mullet",
+    description: "Es uno de los mejores",
+    price: "MX$280",
+    imageUrl: "../src/img/imgpage/mullet.jpg",
   },
 ];
 
 export default function CorteDePelo() {
-  const { darkMode } = useDarkMode() || {}; 
-  const { state, dispatch } = useAppContext();;
+  const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
+  const navigate = useNavigate(); // Para navegar
+
+  // Función para navegar a la página de agendar cita
+  const goToCalendar = () => {
+    navigate("/Calendar"); // Navegar a la página del calendario
+  };
 
   return (
-    <Box sx={{ padding: 4, textAlign: "center", backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#000', width:'100%' }}>
+    <Box
+      sx={{
+        padding: 4,
+        textAlign: "center",
+        backgroundColor: darkMode ? "#333" : "#fff",
+        color: darkMode ? "#fff" : "#000",
+        width: "100%",
+      }}
+    >
       {/* Título */}
-      <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}>
-        Corte de Pelo
-      </Typography>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ marginBottom: 2, textAlign: "center" }} // Espaciado del contenedor
+      >
+        <img
+          src={iconavaja}
+          alt="Icono de navaja"
+          style={{ width: 40, height: 40, marginRight: 8 }} // Tamaño y margen de la imagen
+        />
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}
+        >
+          Corte de Pelo
+        </Typography>
+      </Box>
 
       {/* Imagen */}
       <CardMedia
         component="img"
         height="300"
-        image="path_to_main_image" // Cambia por la ruta de tu imagen
+        image="../src/img/imgpage/serv1.jpg" // Cambia por la ruta de tu imagen
         alt="Corte de Pelo"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
 
       {/* Precio */}
-      <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
-        MX$0
+      <Typography
+        variant="h6"
+        sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}
+      >
+        MX$200
       </Typography>
 
-      {/* Botón Agendar Cita */}
-      <AgendarButton variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}>
+      <Typography variant="body2" color="text.secondary" sx={{ marginTop: 2 }}>
+        Casquete de los lados
+      </Typography>
+
+      {/* Botón Agendar Cita (fuera de las cards) */}
+      <Button
+        variant="contained"
+        sx={{ marginTop: 3, padding: "10px 20px", backgroundColor: "#0aa6bc" }}
+        onClick={goToCalendar} // Navegar al calendario
+      >
         Agendar Cita
-      </AgendarButton>
+      </Button>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>
         <Grid container spacing={4}>
-          {servicesData.map((service, index) => (
+          {servicesDataVictor.map((service, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <StyledCard>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={service.imageUrl}
-                  alt={service.title}
-                />
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {service.description}
-                  </Typography>
-                  <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
-                    {service.price}
-                  </Typography>
-                </CardContent>
-              </StyledCard>
+              <CardWrapper>
+                <StyledCard className="card-hover">
+                  <CardMedia
+                    component="img"
+                    height="260"
+                    image={service.imageUrl}
+                    alt={service.title}
+                  />
+
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {service.description}
+                    </Typography>
+
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        marginTop: 2,
+                        fontFamily: "Rajdhani",
+                        color: "#0aa6bc",
+                      }}
+                    >
+                      {service.price}
+                    </Typography>
+                  </CardContent>
+                </StyledCard>
+
+                <ButtonStyled
+                  className="hover-button"
+                  sx={{
+                    backgroundColor: "rgba(0, 180, 225, 0.7)", // Azul con transparencia
+                    color: "#fff", // Asegura que el texto sea visible
+                    "&:hover": { backgroundColor: "rgba(0, 123, 255, 0.9)" },
+                  }}
+                  onClick={goToCalendar}
+                >
+                  Agendar Cita
+                </ButtonStyled>
+              </CardWrapper>
             </Grid>
           ))}
         </Grid>
