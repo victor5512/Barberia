@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "build/main.jsx"]
+  "include": ["src", "src/main.jsx"]
 }
