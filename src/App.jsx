@@ -11,7 +11,7 @@ import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
 import Tratamiento from "./Tratamiento.jsx";
 // @ts-ignore
-import Citas from "./Cita.tsx"
+import Citas from "./Cita.jsx"
 import { ThemeProvider   } from "./Context/ThemeContext.jsx";
 // import Mascarilla from "./Mascarilla.jsx";
 
