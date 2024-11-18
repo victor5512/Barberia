@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CalendarPage from "./CalendarPage.jsx";
 import BarberShop from "./BarberShop.jsx";
 import Store from "./store.jsx";
@@ -10,14 +10,24 @@ import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
 import Tratamiento from "./Tratamiento.jsx";
+import Navbar from './components/Navbar.jsx';
 // @ts-ignore
-import Citas from "./Cita.tsx"
+import Citas from "./Cita.jsx"
 import { ThemeProvider   } from "./Context/ThemeContext.jsx";
+
+import { createTheme } from "@mui/material/styles";
+import { DarkModeProvider } from './Context/ThemeContext'; 
+
 // import Mascarilla from "./Mascarilla.jsx";
 
 export default function App() {
+
   return (
-    <ThemeProvider>
+    <DarkModeProvider>
+      <Navbar/>
+
+      <div style={{ marginTop: '40px' }}>
+
       <Routes>
         <Route path="/" element={<BarberShop />} /> {/* Ruta principal */}
         <Route path="/Calendar" element={<CalendarPage />} />
@@ -34,6 +44,7 @@ export default function App() {
       <Route path="/citas" element={<Citas />} />
      {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
       </Routes>
-    </ThemeProvider>
+      </div>
+    </DarkModeProvider>
   );
 }

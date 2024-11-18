@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import Cita from './Cita.tsx';
+import Cita from './Cita.jsx';
 import './index.css';
 
 export default function Citas() {
