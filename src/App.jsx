@@ -14,7 +14,6 @@ import Navbar from './components/Navbar.jsx';
 // @ts-ignore
 import Citas from "./Cita.jsx"
 import { ThemeProvider   } from "./Context/ThemeContext.jsx";
-import Citas from "./Cita.tsx"
 
 import { createTheme } from "@mui/material/styles";
 import { DarkModeProvider } from './Context/ThemeContext'; 
