@@ -9,15 +9,16 @@ import Cortespelo from "./Cortespelo.jsx";
 import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
-import Tratamiento from "./Tratamiento.jsx";
+import Masajes from "./Masajes.jsx";
+import Mascarilla from "./Mascarilla.jsx";
 import Navbar from './components/Navbar.jsx';
+
 // @ts-ignore
 import Citas from "./Cita.jsx"
 
 import { createTheme } from "@mui/material/styles";
 import { DarkModeProvider } from './Context/ThemeContext'; 
 
-// import Mascarilla from "./Mascarilla.jsx";
 
 export default function App() {
 
@@ -39,7 +40,9 @@ export default function App() {
         <Route path="/service/coloracion" element={<Coloracion />} />
       <Route path="/service/arreglo-de-barba" element={<Arreglobarba />} />
       <Route path="/service/grecas-y-corte-de-cejas" element={<GrecasCejas />} />
-      <Route path="/service/tratamiento-capilar" element={<Tratamiento />} />
+      <Route path="/service/Masajes" element={<Masajes />} />
+      <Route path="/service/Mascarilla" element={<Mascarilla />} />
+
       <Route path="/citas" element={<Citas />} />
      {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
       </Routes>

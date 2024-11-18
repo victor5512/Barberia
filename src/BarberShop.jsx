@@ -57,15 +57,15 @@ const servicesDataVictor = [
   },
   {
     title: "Servicio 5",
-    description: "Tratamiento Capilar Personalizado.",
+    description: "Masajes.",
     price: "MX$500",
-    imageUrl: "../src/img/imgpage/capilarpersonalizado.png",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajecabeza.jpg",
   },
   {
     title: "Servicio 6",
     description: "Mascarilla.",
     price: "MX$100",
-    imageUrl: "../src/img/imgpage/mascarilla.jpg",
+    imageUrl: "../src/img/imgpage/imgmascarilla/mascarillamediacara.jpg",
   },
 ];
 
@@ -118,8 +118,12 @@ export default function BarberShop() {
     if (service.description === "Grecas y corte de cejas.") {
       navigate(`/service/grecas-y-corte-de-cejas`);
     }
-    if (service.description === "Tratamiento Capilar Personalizado.") {
-      navigate(`/service/tratamiento-capilar`);
+    if (service.description === "Masajes.") {
+      navigate(`/service/Masajes`);
+    }
+    if(service.description==="Mascarilla."){
+      navigate(`/service/Mascarilla`);
+
     }
   };
 
