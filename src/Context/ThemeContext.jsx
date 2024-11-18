@@ -17,7 +17,7 @@ export const DarkModeProvider = ({ children }) => {
     palette: {
       mode: darkMode ? 'dark' : 'light',
       primary: {
-        main: darkMode ? '#1a1a1a' : '#935116',
+        main: darkMode ? '#1a1a1a' : '#0aa6bc',
       },
       background: {
         default: darkMode ? '#121212' : '#ffffff',

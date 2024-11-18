@@ -1,9 +1,17 @@
 import * as React from "react";
+import { useDarkMode } from "./Context/ThemeContext";
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
-import { useDarkMode } from "./Context/ThemeContext";
 
 const CardWrapper = styled("div")(() => ({
   position: "relative",
@@ -77,97 +85,124 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
   },
 }));
 
-const servicesData = [
+const servicesDataVictor = [
   {
-    title: "Arreglo de Barba con Aceite",
-    description: "El arreglo con aceite",
+    title: "Masaje Facial",
+    description: "Masaje facial con delicadesa",
+    price: "MX$100",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajefacial.jpg",
+  },
+  {
+    title: "Masaje de hombros",
+    description: "Masaje solo de hombros",
+    price: "MX$150",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajehombros.jpg",
+  },
+  {
+    title: "Masaje poscorte",
+    description: "Masaje y después un corte",
     price: "MX$250",
-    imageUrl: "../src/img/imgpage/imgbarba/aceitebarba.jpg",
-  },
-  {
-    title: "Arreglo con Shampoo",
-    description: "El shampoo es buenisimo para suavizar la barba",
-    price: "MX$300",
-    imageUrl: "../src/img/imgpage/imgbarba/shampoobarba.jpg",
-  },
-  {
-    title: "Arreglo con exfoliación de miel",
-    description: "El cambio es en cuestión de minutos",
-    price: "MX$500",
-    imageUrl: "../src/img/imgpage/imgbarba/suerobarba.jpg",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajeposcorte.jpg",
   },
 ];
 
-export default function Arreglobarba() {
+export default function Tratamiento() {
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
-  const navigate = useNavigate(); // Para navegar
-
-  // Función para navegar a la página de agendar cita
+  const navigate = useNavigate();
   const goToCalendar = () => {
     navigate("/Calendar"); // Navegar a la página del calendario
   };
-
   return (
-    <Box sx={{ padding: 4, textAlign: "center",backgroundColor: darkMode ? "#333" : "#fff",
-      color: darkMode ? "#fff" : "#000",
-      width: "100%" }}>
+    <Box
+      sx={{
+        padding: 4,
+        textAlign: "center",
+        backgroundColor: darkMode ? "#333" : "#fff",
+        color: darkMode ? "#fff" : "#000",
+        width: "100%",
+      }}
+    >
       {/* Título */}
-      <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2,display:"flex",justifyContent:"center",alignItems:"center" }}>
-      <ContentCutIcon
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontFamily: "Rajdhani",
+          marginBottom: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ContentCutIcon
           sx={{ marginRight: 1, fontSize: 40, color: "#0aa6bc" }}
         />
-        Arreglo de Barba
+        Masajes
       </Typography>
 
       {/* Imagen */}
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/cortebarba.jpg" // Cambia por la ruta de tu imagen
-        alt="Arreglo de Barba"
+        image="../src/img/imgpage/imgmasajes/masajecabeza.jpg" // Cambia por la ruta de tu imagen
+        alt="Masajes"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
-
+      {/* subiendo cambios */}
       {/* Precio */}
-      <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
-        MX$150
+      <Typography
+        variant="h6"
+        sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}
+      >
+        MX$500
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ marginTop: 2 }}>
-        Arreglo de Barba
+        Masajes con calidad
       </Typography>
+
       {/* Botón Agendar Cita */}
-      <Button variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar}>
+      <Button
+        variant="contained"
+        sx={{ marginTop: 3, padding: "10px 20px" }}
+        onClick={goToCalendar}
+      >
         Agendar Cita
       </Button>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>
         <Grid container spacing={4}>
-          {servicesData.map((service, index) => (
+          {servicesDataVictor.map((service, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-                            <CardWrapper>
+              <CardWrapper>
+                <StyledCard className="card-hover">
+                  <CardMedia
+                    component="img"
+                    height="260"
+                    image={service.imageUrl}
+                    alt={service.title}
+                  />
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {service.description}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        marginTop: 2,
+                        fontFamily: "Rajdhani",
+                        color: "#0aa6bc",
+                      }}
+                    >
+                      {service.price}
+                    </Typography>
+                  </CardContent>
+                </StyledCard>
 
-              <StyledCard className="card-hover">
-                <CardMedia
-                  component="img"
-                  height="260"
-                  image={service.imageUrl}
-                  alt={service.title}
-                />
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {service.description}
-                  </Typography>
-                  <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
-                    {service.price}
-                  </Typography>
-                </CardContent>
-              </StyledCard>
-              <ButtonStyled
+                <ButtonStyled
                   className="hover-button"
                   sx={{
                     backgroundColor: "rgba(0, 180, 225, 0.7)", // Azul con transparencia

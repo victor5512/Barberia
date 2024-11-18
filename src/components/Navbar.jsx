@@ -33,7 +33,6 @@ import {
   Drawer,
   Switch,
 } from "@mui/material";
-import fondomader from "../img/fondomader.jpg";
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   transition: "transform 0.3s ease, box-shadow 0.3s ease", // Transición
   "&:hover": {

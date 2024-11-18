@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useDarkMode } from "./Context/ThemeContext";
 import { styled } from "@mui/material/styles";
-import iconavaja from "./img/imgpage/iconavaja.gif";
 import {
   Box,
   Typography,
@@ -12,6 +11,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom"; // Para la navegación
+import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
 const CardWrapper = styled("div")(() => ({
   position: "relative",
@@ -49,7 +49,7 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
   left: "50%", // Centrado horizontalmente
   transform: "translateX(-50%)", // Ajuste para el centrado
   width: "80%", // Ancho relativo para adaptarse a diferentes pantallas
-  maxWidth: "343px", // Límite máximo de ancho
+  maxWidth: "340px", // Límite máximo de ancho
   height: "60px", // Altura más compacta
   backgroundColor: "rgba(0, 0, 255, 0.4)", // Fondo semi-transparente azul
   color: "#fff",
@@ -126,25 +126,16 @@ export default function CorteDePelo() {
       }}
     >
       {/* Título */}
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ marginBottom: 2, textAlign: "center" }} // Espaciado del contenedor
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{ fontFamily: "Rajdhani", marginBottom: 2,display:"flex",justifyContent:"center",alignItems:"center" }}
       >
-        <img
-          src={iconavaja}
-          alt="Icono de navaja"
-          style={{ width: 40, height: 40, marginRight: 8 }} // Tamaño y margen de la imagen
+        <ContentCutIcon
+          sx={{ marginRight: 1, fontSize: 40, color: "#0aa6bc" }}
         />
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}
-        >
-          Corte de Pelo
-        </Typography>
-      </Box>
+        Corte de Pelo
+      </Typography>
 
       {/* Imagen */}
       <CardMedia
@@ -152,6 +143,7 @@ export default function CorteDePelo() {
         height="300"
         image="../src/img/imgpage/serv1.jpg" // Cambia por la ruta de tu imagen
         alt="Corte de Pelo"
+        
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
 
@@ -170,7 +162,7 @@ export default function CorteDePelo() {
       {/* Botón Agendar Cita (fuera de las cards) */}
       <Button
         variant="contained"
-        sx={{ marginTop: 3, padding: "10px 20px", backgroundColor: "#0aa6bc" }}
+        sx={{ marginTop: 3, padding: "10px 20px",  }}
         onClick={goToCalendar} // Navegar al calendario
       >
         Agendar Cita
