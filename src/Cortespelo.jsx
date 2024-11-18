@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useTheme  } from './Context/ThemeContext.jsx'; // Asegúrate de que esta ruta sea correcta
+import { useTheme } from "./Context/ThemeContext.jsx"; // Asegúrate de que esta ruta sea correcta
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import { useAppContext } from './Context/appContext';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -22,33 +23,37 @@ const AgendarButton = styled(Button)(({ theme }) => ({
 }));
 
 const servicesData = [
-  {
-    title: "Servicio 1",
-    description: "Descripción del servicio 1",
-    price: "MX$0",
-    imageUrl: "path_to_image_1",
-  },
-  {
-    title: "Servicio 2",
-    description: "Descripción del servicio 2",
-    price: "MX$0",
-    imageUrl: "path_to_image_2",
-  },
-  {
-    title: "Servicio 3",
-    description: "Descripción del servicio 3",
-    price: "MX$0",
-    imageUrl: "path_to_image_3",
-  },
+  { title: "Servicio 1", description: "Descripción del servicio 1", price: "MX$0", imageUrl: "path_to_image_1" },
+  { title: "Servicio 2", description: "Descripción del servicio 2", price: "MX$0", imageUrl: "path_to_image_2" },
+  { title: "Servicio 3", description: "Descripción del servicio 3", price: "MX$0", imageUrl: "path_to_image_3" },
 ];
 
 export default function CorteDePelo() {
   const { darkMode } = useTheme();
+  // const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
+  React.useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? "#333" : "#fff";
+  }, [darkMode]);
+  const { state, dispatch } = useAppContext();;
+
+  console.log("aaaaaaaaaaaaaaaaaaaa",state)
   return (
-    <Box sx={{ padding: 4, textAlign: "center", backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#000', minHeight: '100vh' }}>
+    <Box
+      sx={{
+        padding: 4,
+        textAlign: "center",
+        backgroundColor: darkMode ? "#333" : "#fff",
+        color: darkMode ? "#fff" : "#000",
+        minHeight: "100vh",
+      }}
+    >
       {/* Título */}
-      <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}
+      >
         Corte de Pelo
       </Typography>
 
@@ -62,12 +67,18 @@ export default function CorteDePelo() {
       />
 
       {/* Precio */}
-      <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
+      <Typography
+        variant="h6"
+        sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}
+      >
         MX$0
       </Typography>
 
       {/* Botón Agendar Cita */}
-      <AgendarButton variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}>
+      <AgendarButton
+        variant="contained"
+        sx={{ marginTop: 3, padding: "10px 20px" }}
+      >
         Agendar Cita
       </AgendarButton>
 
@@ -90,7 +101,14 @@ export default function CorteDePelo() {
                   <Typography variant="body2" color="text.secondary">
                     {service.description}
                   </Typography>
-                  <Typography variant="h6" sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      marginTop: 2,
+                      fontFamily: "Rajdhani",
+                      color: "#0aa6bc",
+                    }}
+                  >
                     {service.price}
                   </Typography>
                 </CardContent>
