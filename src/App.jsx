@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CalendarPage from "./CalendarPage.jsx";
+import CalendarPage from "./TablaRegistros.jsx";
 import BarberShop from "./BarberShop.jsx";
 import Store from "./store.jsx";
 import Sesion from "./login.jsx";
