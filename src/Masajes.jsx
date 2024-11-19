@@ -1,12 +1,6 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
-import Citas from './Cita';
-import CloseIcon from '@mui/icons-material/Close';
 import { useDarkMode } from "./Context/ThemeContext";
-import { useNavigate } from "react-router-dom"; // Para la navegación
-import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
-
+import { styled } from "@mui/material/styles";
 import {
   Box,
   Typography,
@@ -16,6 +10,8 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Para la navegación
+import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
 const CardWrapper = styled("div")(() => ({
   position: "relative",
@@ -91,39 +87,31 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
 
 const servicesDataVictor = [
   {
-    title: "Ceja doble línea",
-    description: "Ceja doble línea",
-    price: "MX$60",
-    imageUrl: "../src/img/imgpage/imggrecas/cejadoblelinea.jpg",
+    title: "Masaje Facial",
+    description: "Masaje facial con delicadesa",
+    price: "MX$100",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajefacial.jpg",
   },
   {
-    title: "Ceja de una sola línea",
-    description: "Para estar a la moda",
-    price: "MX$70",
-    imageUrl: "../src/img/imgpage/imggrecas/cejalinea.jpg",
+    title: "Masaje de hombros",
+    description: "Masaje solo de hombros",
+    price: "MX$150",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajehombros.jpg",
   },
   {
-    title: "Ceja en forma de X",
-    description: "Uno de las grandes estilos fantasticos",
-    price: "MX$90",
-    imageUrl: "../src/img/imgpage/imggrecas/cejax.jpg",
+    title: "Masaje poscorte",
+    description: "Masaje y después un corte",
+    price: "MX$250",
+    imageUrl: "../src/img/imgpage/imgmasajes/masajeposcorte.jpg",
   },
 ];
 
-export default function GrecasCejas() {
+export default function Tratamiento() {
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
-  const navigate = useNavigate(); // Para navegar
-
-  // Función para navegar a la página de agendar cita
+  const navigate = useNavigate();
   const goToCalendar = () => {
     navigate("/Calendar"); // Navegar a la página del calendario
   };
-  const [open, setOpen] = React.useState(false);
-
-  // Manejar apertura y cierre del popup
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   return (
     <Box
       sx={{
@@ -146,32 +134,32 @@ export default function GrecasCejas() {
           alignItems: "center",
         }}
       >
-        {" "}
         <ContentCutIcon
           sx={{ marginRight: 1, fontSize: 40, color: "#0aa6bc" }}
         />
-        Grecas Cejas
+        Masajes
       </Typography>
 
       {/* Imagen */}
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/greca1.jpg" // Cambia por la ruta de tu imagen
-        alt="Grecas cejas"
+        image="../src/img/imgpage/imgmasajes/masajecabeza.jpg" // Cambia por la ruta de tu imagen
+        alt="Masajes"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
-
+      {/* subiendo cambios */}
       {/* Precio */}
       <Typography
         variant="h6"
         sx={{ marginTop: 2, fontFamily: "Rajdhani", color: "#0aa6bc" }}
       >
-        MX$50
+        MX$500
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ marginTop: 2 }}>
-        Grecas.
+        Masajes con calidad
       </Typography>
+
       {/* Botón Agendar Cita */}
       <Button
         variant="contained"
@@ -180,26 +168,6 @@ export default function GrecasCejas() {
       >
         Agendar Cita
       </Button>
-      </AgendarButton>
-
-      {/* Popup con el formulario */}
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        <DialogContent>
-          <Citas onClose={handleClose}/>
-        </DialogContent>
-      </Dialog>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>
@@ -233,6 +201,7 @@ export default function GrecasCejas() {
                     </Typography>
                   </CardContent>
                 </StyledCard>
+
                 <ButtonStyled
                   className="hover-button"
                   sx={{
