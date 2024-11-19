@@ -1,10 +1,11 @@
-
 // CorteDePelo.jsx
 import * as React from "react";
-import { useDarkMode } from './Context/ThemeContext'; // Actualiza la importación con el nombre correcto
+import { useDarkMode } from './Context/ThemeContext';
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import { useAppContext } from './Context/appContext';
+import CloseIcon from '@mui/icons-material/Close';
+import Citas from './Cita'; 
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -47,10 +48,25 @@ const servicesData = [
 
 export default function CorteDePelo() {
   const { darkMode } = useDarkMode() || {}; 
-  const { state, dispatch } = useAppContext();;
+  const { state, dispatch } = useAppContext();
+  
+  // Estado para el diálogo
+  const [open, setOpen] = React.useState(false);
+
+  // Manejar apertura y cierre del popup
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ padding: 4, textAlign: "center", backgroundColor: darkMode ? '#333' : '#fff', color: darkMode ? '#fff' : '#000', width:'100%' }}>
+    <Box
+      sx={{
+        padding: 4,
+        textAlign: "center",
+        backgroundColor: darkMode ? '#333' : '#fff',
+        color: darkMode ? '#fff' : '#000',
+        width: '100%',
+      }}
+    >
       {/* Título */}
       <Typography variant="h4" component="h1" sx={{ fontFamily: "Rajdhani", marginBottom: 2 }}>
         Corte de Pelo
@@ -60,7 +76,7 @@ export default function CorteDePelo() {
       <CardMedia
         component="img"
         height="300"
-        image="path_to_main_image" // Cambia por la ruta de tu imagen
+        image="path_to_main_image"
         alt="Corte de Pelo"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
@@ -71,9 +87,28 @@ export default function CorteDePelo() {
       </Typography>
 
       {/* Botón Agendar Cita */}
-      <AgendarButton variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}>
+      <AgendarButton variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }} onClick={handleOpen}>
         Agendar Cita
       </AgendarButton>
+
+      {/* Popup con el formulario */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        <DialogContent>
+          <Citas onClose={handleClose}/>
+        </DialogContent>
+      </Dialog>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>

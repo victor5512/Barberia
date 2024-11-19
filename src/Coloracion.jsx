@@ -1,7 +1,9 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
+import { Box, Typography, Card, CardContent,IconButton,DialogContent, CardMedia, Button, Grid, Dialog } from "@mui/material";
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
+import CloseIcon from '@mui/icons-material/Close';
+import Citas from './Cita';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -43,6 +45,11 @@ const servicesData = [
 ];
 
 export default function Coloracion() {
+  const [open, setOpen] = React.useState(false);
+
+  // Manejar apertura y cierre del popup
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box sx={{ padding: 4, textAlign: "center" }}>
       {/* Título con ícono */}
@@ -81,10 +88,27 @@ export default function Coloracion() {
       {/* Botón Agendar Cita */}
       <AgendarButton
         variant="contained"
-        sx={{ marginTop: 3, padding: "10px 20px" }}
+        sx={{ marginTop: 3, padding: "10px 20px" }} onClick={handleOpen}
       >
         Agendar Cita
       </AgendarButton>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" >
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        <DialogContent>
+          <Citas onClose={handleClose}/>
+        </DialogContent>
+      </Dialog>
 
       {/* Cards de servicios */}
       <Box sx={{ marginTop: 6 }}>
