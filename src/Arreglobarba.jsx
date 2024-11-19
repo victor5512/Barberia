@@ -145,7 +145,7 @@ export default function Arreglobarba() {
       </Typography>
       {/* Botón Agendar Cita */}
       <Button variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar}>
+        onClick={handleOpen}>
         Agendar Cita
       </Button>
 

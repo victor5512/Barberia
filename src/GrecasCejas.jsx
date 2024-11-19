@@ -7,16 +7,6 @@ import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
-} from "@mui/material";
-
 const CardWrapper = styled("div")(() => ({
   position: "relative",
   "&:hover .hover-button": {
@@ -176,7 +166,7 @@ export default function GrecasCejas() {
       <Button
         variant="contained"
         sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar}
+        onClick={handleOpen}
       >
         Agendar Cita
       </Button>

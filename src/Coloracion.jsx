@@ -160,11 +160,10 @@ export default function Coloracion() {
       <Button
         variant="contained"
         sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar} // Navegar al calendario
+        onClick={handleOpen} // Navegar al calendario
       >
         Agendar Cita
       </Button>
-      </AgendarButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" >
           <IconButton
             aria-label="close"

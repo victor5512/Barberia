@@ -1,20 +1,10 @@
 import * as React from "react";
 import { useDarkMode } from "./Context/ThemeContext";
-import { useDarkMode } from './Context/ThemeContext';
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import Citas from './Cita'; 
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
-} from "@mui/material";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
@@ -112,8 +102,6 @@ const servicesDataVictor = [
 ];
 
 export default function CorteDePelo() {
-  const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
-  const navigate = useNavigate(); // Para navegar
 
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
@@ -177,11 +165,10 @@ export default function CorteDePelo() {
       <Button
         variant="contained"
         sx={{ marginTop: 3, padding: "10px 20px",  }}
-        onClick={goToCalendar} // Navegar al calendario
+        onClick={handleOpen} // Navegar al calendario
       >
         Agendar Cita
       </Button>
-      </AgendarButton>
 
       {/* Popup con el formulario */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">

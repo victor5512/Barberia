@@ -2,14 +2,10 @@ import * as React from "react";
 import { useDarkMode } from "./Context/ThemeContext";
 import { styled } from "@mui/material/styles";
 import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
+  Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton
 } from "@mui/material";
+import Citas from './Cita';
+import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
@@ -114,6 +110,11 @@ export default function Mascarilla() {
   const goToCalendar = () => {
     navigate("/Calendar"); // Navegar a la página del calendario
   };
+  const [open, setOpen] = React.useState(false);
+
+  // Manejar apertura y cierre del popup
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Box
@@ -169,10 +170,29 @@ export default function Mascarilla() {
       <Button
         variant="contained"
         sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar} // Navegar al calendario
+        onClick={handleOpen} // Navegar al calendario
       >
         Agendar Cita
       </Button>
+
+      {/* Popup con el formulario */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        <DialogContent>
+          <Citas onClose={handleClose}/>
+        </DialogContent>
+      </Dialog>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>
