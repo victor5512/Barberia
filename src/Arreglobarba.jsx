@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import Citas from './Cita';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 import { useDarkMode } from "./Context/ThemeContext";
@@ -148,7 +147,7 @@ export default function Arreglobarba() {
       <Button variant="contained" sx={{ marginTop: 3, padding: "10px 20px" }}
         onClick={goToCalendar}>
         Agendar Cita
-      </AgendarButton>
+      </Button>
 
       {/* Popup con el formulario */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
@@ -168,7 +167,6 @@ export default function Arreglobarba() {
           <Citas onClose={handleClose}/>
         </DialogContent>
       </Dialog>
-      </Button>
 
       {/* Cards debajo */}
       <Box sx={{ marginTop: 6 }}>

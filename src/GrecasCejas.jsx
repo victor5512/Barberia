@@ -180,7 +180,6 @@ export default function GrecasCejas() {
       >
         Agendar Cita
       </Button>
-      </AgendarButton>
 
       {/* Popup con el formulario */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
