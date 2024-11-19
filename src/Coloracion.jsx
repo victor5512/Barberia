@@ -1,15 +1,9 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Box, Typography, Card, CardContent,IconButton,DialogContent, CardMedia, Button, Grid, Dialog } from "@mui/material";
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
+import CloseIcon from '@mui/icons-material/Close';
+import Citas from './Cita';
 import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 
@@ -114,6 +108,11 @@ export default function Coloracion() {
   const goToCalendar = () => {
     navigate("/Calendar"); // Navegar a la página del calendario
   };
+  const [open, setOpen] = React.useState(false);
+
+  // Manejar apertura y cierre del popup
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box sx={{ padding: 4, textAlign: "center",backgroundColor: darkMode ? "#333" : "#fff",
       color: darkMode ? "#fff" : "#000",
@@ -161,10 +160,27 @@ export default function Coloracion() {
       <Button
         variant="contained"
         sx={{ marginTop: 3, padding: "10px 20px" }}
-        onClick={goToCalendar} // Navegar al calendario
+        onClick={handleOpen} // Navegar al calendario
       >
         Agendar Cita
       </Button>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" >
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        <DialogContent>
+          <Citas onClose={handleClose}/>
+        </DialogContent>
+      </Dialog>
 
       {/* Cards de servicios */}
       <Box sx={{ marginTop: 6 }}>

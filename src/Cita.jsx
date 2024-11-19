@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, Typography } from '@mui/material';
 import { createItemId } from "./servicios/firebase";
 
-export default function RegistroCita({ onSubmit }) {
+export default function RegistroCita({onClose}) {
   const { enqueueSnackbar } = useSnackbar();
 
   const initialValues = {
@@ -29,9 +29,10 @@ export default function RegistroCita({ onSubmit }) {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       await createItemId("citas", values);
+      enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       resetForm();
+      onClose();
     } catch (error) {
       enqueueSnackbar('Error al registrar la cita: ' + error.message, { variant: 'error' });
     } finally {
