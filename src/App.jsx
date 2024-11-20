@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CalendarPage from "./CalendarPage.jsx";
+import CalendarPage from "./TablaRegistros.jsx";
 import BarberShop from "./BarberShop.jsx";
 import Store from "./store.jsx";
 import Sesion from "./login.jsx";
@@ -9,16 +9,16 @@ import Cortespelo from "./Cortespelo.jsx";
 import Coloracion from "./Coloracion.jsx";
 import Arreglobarba from "./Arreglobarba.jsx";
 import GrecasCejas from "./GrecasCejas.jsx";
-import Tratamiento from "./Tratamiento.jsx";
+import Masajes from "./Masajes.jsx";
+import Mascarilla from "./Mascarilla.jsx";
 import Navbar from './components/Navbar.jsx';
+
 // @ts-ignore
 import Citas from "./Cita.jsx"
-import { ThemeProvider   } from "./Context/ThemeContext.jsx";
 
 import { createTheme } from "@mui/material/styles";
 import { DarkModeProvider } from './Context/ThemeContext'; 
 
-// import Mascarilla from "./Mascarilla.jsx";
 
 export default function App() {
 
@@ -40,7 +40,9 @@ export default function App() {
         <Route path="/service/coloracion" element={<Coloracion />} />
       <Route path="/service/arreglo-de-barba" element={<Arreglobarba />} />
       <Route path="/service/grecas-y-corte-de-cejas" element={<GrecasCejas />} />
-      <Route path="/service/tratamiento-capilar" element={<Tratamiento />} />
+      <Route path="/service/Masajes" element={<Masajes />} />
+      <Route path="/service/Mascarilla" element={<Mascarilla />} />
+
       <Route path="/citas" element={<Citas />} />
      {/* <Route path="/service/mascarilla" element={<Mascarilla />} /> */}
       </Routes>

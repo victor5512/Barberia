@@ -88,28 +88,7 @@ export default function Registrar() {
               Registrar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="phone"
-                label="Telefono"
-                name="phone"
-                type="number"
-                autoComplete="phone"
-                autoFocus
-                value={formData.phone}
-                onChange={handleChange}
-                sx={{
-                  '& .MuiInputLabel-root': { color: 'black' },
-                  '& .MuiInputBase-input': { color: 'black' },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': { borderColor: 'black' },
-                    '&:hover fieldset': { borderColor: 'black' },
-                    '&.Mui-focused fieldset': { borderColor: 'black' },
-                  },
-                }}
-              />
+              
               <TextField
                 margin="normal"
                 required
