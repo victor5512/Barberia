@@ -6,6 +6,7 @@ import {Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, Dia
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 import Citas from './Cita';
+import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 
 const CardWrapper = styled("div")(() => ({
@@ -102,6 +103,7 @@ const servicesDataVictor = [
 ];
 
 export default function Tratamiento() {
+  const { objectData, updateObject } = useAppContext();
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
   const navigate = useNavigate();
   const goToCalendar = () => {
@@ -184,7 +186,7 @@ export default function Tratamiento() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={'Masajes'}/>
         </DialogContent>
       </Dialog>
 

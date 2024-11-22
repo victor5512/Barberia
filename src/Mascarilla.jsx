@@ -5,6 +5,7 @@ import {
   Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton
 } from "@mui/material";
 import Citas from './Cita';
+import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
@@ -103,6 +104,7 @@ const servicesDataVictor = [
 ];
 
 export default function Mascarilla() {
+  const { objectData, updateObject } = useAppContext();
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
   const navigate = useNavigate(); // Para navegar
 
@@ -190,7 +192,7 @@ export default function Mascarilla() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={'Mascarilla'}/>
         </DialogContent>
       </Dialog>
 

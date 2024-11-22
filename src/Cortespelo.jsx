@@ -102,7 +102,7 @@ const servicesDataVictor = [
 ];
 
 export default function CorteDePelo() {
-
+  const { objectData, updateObject } = useAppContext();
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
     navigate("/Calendar"); // Navegar a la página del calendario
@@ -116,7 +116,7 @@ export default function CorteDePelo() {
   // Manejar apertura y cierre del popup
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log("context",objectData)
   return (
     <Box
       sx={{
@@ -185,7 +185,7 @@ export default function CorteDePelo() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={"Corte-de-cabello"} />
         </DialogContent>
       </Dialog>
 

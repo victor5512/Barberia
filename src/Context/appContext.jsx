@@ -1,59 +1,34 @@
-import React, { createContext, useContext, useReducer } from 'react';
-
-// Estado inicial
-const initialState = {
-    user: null,
-    phone: null,
-    service: null,
-    email: null,
-    theme: 'light',
-    // Puedes añadir más propiedades según tus necesidades
-};
-
-// Reductor para manejar las acciones de actualización del estado
-function appReducer(state, action) {
-    switch (action.type) {
-        case 'SET_USER_DATA':
-            return {
-                ...state,
-                user: action.payload.user,
-                phone: action.payload.phone,
-                email: action.payload.email,
-                // Puedes añadir más campos si es necesario
-            };
-        case 'SET_THEME':
-            return { ...state, theme: action.payload };
-        case 'LOGOUT':
-            return {
-                ...state,
-                user: null,
-                phone: null,
-                email: null,
-                // Restablecer otros campos si es necesario
-            };
-        default:
-            return state;
-    }
-}
-
-
-
+import React, { createContext, useState, useContext, useEffect  } from "react";
 
 // Crear el contexto
 const AppContext = createContext();
+const LOCAL_STORAGE_KEY = "objectData";
 
-// Crear el proveedor
-export function AppProvider({ children }) {
-    const [state, dispatch] = useReducer(appReducer, initialState);
+export const AppProvider = ({ children }) => {
+  // Estado inicial: objeto vacío
+  const [objectData, setObjectData] = useState(() => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedData ? JSON.parse(storedData) : {};
+  });
 
-    return (
-        <AppContext.Provider value={{ state, dispatch }}>
-            {children}
-        </AppContext.Provider>
-    );
-}
+  const updateObject = (newObject) => {
+    setObjectData(newObject);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newObject));
+  };
 
-// Hook personalizado para usar el contexto en otros componentes
-export function useAppContext() {
-    return useContext(AppContext);
-}
+  useEffect(() => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedData) {
+      setObjectData(JSON.parse(storedData));
+    }
+  }, []);
+
+  return (
+    <AppContext.Provider value={{ objectData, updateObject }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+// Hook personalizado para usar el contexto
+export const useAppContext = () => useContext(AppContext);

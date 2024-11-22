@@ -24,7 +24,7 @@ import { useAppContext } from './Context/appContext';
 
 export default function Login() {
   const defaultTheme = createTheme()
-  const { state, dispatch } = useAppContext();;
+  const { objectData, updateObject } = useAppContext();;
   const navigate = useNavigate();
 
   // Estados para los inputs
@@ -48,10 +48,7 @@ export default function Login() {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
         setOpenSnackbar(true);
-        dispatch({
-          type: 'SET_USER_DATA',
-          payload: { user: us.displayName, email: us.email, phone: us.phoneNumber },
-        });
+        updateObject(us);
         setTimeout(() => {
           navigate("/");
         }, 1500);
@@ -74,10 +71,7 @@ export default function Login() {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
         setOpenSnackbar(true);
-        dispatch({
-          type: 'SET_USER_DATA',
-          payload: { name: "", email: email, phone: "" },
-        });
+        updateObject(user);
         // Redirigir a la página principal
         setTimeout(() => {
           navigate("/");

@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import Citas from './Cita';
+import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
@@ -101,6 +102,7 @@ const servicesDataVictor = [
 ];
 
 export default function GrecasCejas() {
+  const { objectData, updateObject } = useAppContext();
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
   const navigate = useNavigate(); // Para navegar
 
@@ -186,7 +188,7 @@ export default function GrecasCejas() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={'Grecas'}/>
         </DialogContent>
       </Dialog>
 

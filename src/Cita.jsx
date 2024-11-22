@@ -4,16 +4,19 @@ import { useSnackbar } from 'notistack';
 import { Formik, Form, Field } from 'formik';
 import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, Typography } from '@mui/material';
 import { createItemId } from "./servicios/firebase";
+import { useAppContext } from './Context/appContext';
 
-export default function RegistroCita({onClose}) {
+export default function RegistroCita({onClose, serv}) {
   const { enqueueSnackbar } = useSnackbar();
+  const { objectData, updateObject } = useAppContext();
 
+  const today = new Date().toLocaleDateString();
   const initialValues = {
-    nombre: '',
-    telefono: '',
-    fecha: '',
+    nombre: objectData.displayName || '',
+    telefono: objectData.phoneNumber || '',
+    fecha: today,
     hora: '',
-    servicio: '',
+    servicio: serv,
   };
 
   const CitaSchema = Yup.object().shape({
@@ -29,6 +32,10 @@ export default function RegistroCita({onClose}) {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+      values = {
+        ...values,
+        usuario: objectData.uid
+      };
       await createItemId("citas", values);
       enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       resetForm();
@@ -101,10 +108,12 @@ export default function RegistroCita({onClose}) {
                       error={Boolean(touched.servicio && errors.servicio)}
                       helperText={touched.servicio && errors.servicio}
                     >
-                      <MenuItem value="Corte de cabello">Corte de cabello</MenuItem>
-                      <MenuItem value="Afeitado">Afeitado</MenuItem>
-                      <MenuItem value="Tinte">Tinte</MenuItem>
-                      <MenuItem value="Limpieza facial">Limpieza facial</MenuItem>
+                      <MenuItem value="Corte-de-cabello">Corte de cabello</MenuItem>
+                      <MenuItem value="Arreglo-barba">Arreglo de barba</MenuItem>
+                      <MenuItem value="Mascarilla">Mascarilla</MenuItem>
+                      <MenuItem value="Masajes">Masajes</MenuItem>
+                      <MenuItem value="Coloracion">Coloración</MenuItem>
+                      <MenuItem value="Grecas">Grecas</MenuItem>
                     </Field>
                     <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
                       <Button
