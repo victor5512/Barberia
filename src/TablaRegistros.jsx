@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import { readItems } from './servicios/firebase';
+import { useAppContext } from './Context/appContext';
 import {
   GridRowModes,
   DataGrid,
@@ -90,6 +91,7 @@ function EditToolbar(props) {
 
 export default function FullFeaturedCrudGrid() {
   const citas = readItems();
+  const { objectData, updateObject } = useAppContext();
   const [rows, setRows] = React.useState(citas);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const handleRowEditStop = (params, event) => {
