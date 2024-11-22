@@ -39,7 +39,7 @@ export const readItems = async (usuario) => {
 };
 
 export const updateItem = async (id, updatedData) => {
-    const docRef = doc(db, "items", id);
+    const docRef = doc(db, "citas", id);
   
     try {
       await updateDoc(docRef, updatedData);
