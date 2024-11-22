@@ -13,7 +13,7 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
-import { readItems } from './servicios/firebase';
+import { readItems, deleteItem } from './servicios/firebase';
 import { useAppContext } from './Context/appContext';
 
 function EditToolbar({ setRows, setRowModesModel }) {
@@ -68,6 +68,7 @@ export default function FullFeaturedCrudGrid() {
 
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
+    deleteItem(id);
   };
 
   const handleCancelClick = (id) => () => {

@@ -50,7 +50,7 @@ export const updateItem = async (id, updatedData) => {
 };
 
 export const deleteItem = async (id) => {
-    const docRef = doc(db, "items", id);
+    const docRef = doc(db, "citas", id);
   
     try {
       await deleteDoc(docRef);
