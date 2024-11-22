@@ -26,7 +26,7 @@ export const createItem = async (data,colec) => {
 
 export const readItems = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "items"));
+      const querySnapshot = await getDocs(collection(db, "citas"));
       querySnapshot.forEach((doc) => {
         console.log(`${doc.id} =>`, doc.data());
       });
