@@ -4,6 +4,7 @@ import { Box, Typography, Card, CardContent,IconButton,DialogContent, CardMedia,
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 import CloseIcon from '@mui/icons-material/Close';
 import Citas from './Cita';
+import { useAppContext } from './Context/appContext';
 import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 
@@ -101,6 +102,7 @@ const servicesDataVictor = [
 ];
 
 export default function Coloracion() {
+  const { objectData, updateObject } = useAppContext();
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
   const navigate = useNavigate(); // Para navegar
 
@@ -178,7 +180,7 @@ export default function Coloracion() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={'Coloracion'}/>
         </DialogContent>
       </Dialog>
 

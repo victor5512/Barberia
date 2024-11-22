@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import Citas from './Cita';
+import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
@@ -102,7 +103,7 @@ const servicesData = [
 
 export default function Arreglobarba() {
   const [open, setOpen] = React.useState(false);
-
+  const { objectData, updateObject } = useAppContext();
   // Manejar apertura y cierre del popup
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -164,7 +165,7 @@ export default function Arreglobarba() {
             <CloseIcon />
           </IconButton>
         <DialogContent>
-          <Citas onClose={handleClose}/>
+          <Citas onClose={handleClose} serv={'Arreglo-barba'}/>
         </DialogContent>
       </Dialog>
 
