@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -6,8 +6,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
-import { readItems } from './servicios/firebase';
-import { useAppContext } from './Context/appContext';
 import {
   GridRowModes,
   DataGrid,
@@ -15,68 +13,19 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-} from '@mui/x-data-grid-generator';
+import { readItems } from './servicios/firebase';
+import { useAppContext } from './Context/appContext';
 
-const roles = ['Market', 'Finance', 'Development'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-const initialRows = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
-
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
-
+function EditToolbar({ setRows, setRowModesModel }) {
   const handleClick = () => {
-    const id = randomId();
+    const id = new Date().getTime().toString();
     setRows((oldRows) => [
       ...oldRows,
-      { id, name: '', age: '', role: '', isNew: true },
+      { id, nombre: '', telefono: '', servicio: '', fecha: '', hora: '', isNew: true },
     ]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'nombre' },
     }));
   };
 
@@ -90,10 +39,19 @@ function EditToolbar(props) {
 }
 
 export default function FullFeaturedCrudGrid() {
-  const citas = readItems();
   const { objectData, updateObject } = useAppContext();
-  const [rows, setRows] = React.useState(citas);
-  const [rowModesModel, setRowModesModel] = React.useState({});
+  const [rows, setRows] = useState([]);
+  const [rowModesModel, setRowModesModel] = useState({});
+
+  // Cargar datos de Firestore
+  useEffect(() => {
+    const fetchCitas = async () => {
+      const citas = await readItems(objectData.uid);
+      setRows(citas); // Actualiza las filas con los datos de Firestore
+    };
+    fetchCitas();
+  }, []);
+
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
@@ -135,37 +93,16 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const columns = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 80,
-      align: 'left',
-      headerAlign: 'left',
-      editable: true,
-    },
-    {
-      field: 'joinDate',
-      headerName: 'Join date',
-      type: 'date',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'role',
-      headerName: 'Department',
-      width: 220,
-      editable: true,
-      type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
-    },
+    { field: 'nombre', headerName: 'Nombre', width: 180, editable: true },
+    { field: 'telefono', headerName: 'Teléfono', width: 140, editable: true },
+    { field: 'servicio', headerName: 'Servicio', width: 180, editable: true },
+    { field: 'fecha', headerName: 'Fecha', width: 140, editable: true },
+    { field: 'hora', headerName: 'Hora', width: 120, editable: true },
     {
       field: 'actions',
       type: 'actions',
       headerName: 'Actions',
       width: 100,
-      cellClassName: 'actions',
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
@@ -174,15 +111,11 @@ export default function FullFeaturedCrudGrid() {
             <GridActionsCellItem
               icon={<SaveIcon />}
               label="Save"
-              sx={{
-                color: 'primary.main',
-              }}
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
               icon={<CancelIcon />}
               label="Cancel"
-              className="textPrimary"
               onClick={handleCancelClick(id)}
               color="inherit"
             />,
@@ -193,7 +126,6 @@ export default function FullFeaturedCrudGrid() {
           <GridActionsCellItem
             icon={<EditIcon />}
             label="Edit"
-            className="textPrimary"
             onClick={handleEditClick(id)}
             color="inherit"
           />,
@@ -209,18 +141,7 @@ export default function FullFeaturedCrudGrid() {
   ];
 
   return (
-    <Box
-      sx={{
-        height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-      }}
-    >
+    <Box sx={{ height: 500, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

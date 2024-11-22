@@ -24,12 +24,15 @@ export const createItem = async (data,colec) => {
     }
 };
 
-export const readItems = async () => {
+export const readItems = async (usuario) => {
     try {
-      const querySnapshot = await getDocs(collection(db, "citas"));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} =>`, doc.data());
-      });
+      const q = query(collection(db, "citas"), where("usuario", "==", usuario));
+      const querySnapshot = await getDocs(q);
+      // querySnapshot.forEach((doc) => {
+      //   console.log(`${doc.id} =>`, doc.data());
+      // });
+      console.log("cc",querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+      return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     } catch (e) {
       console.error("Error reading documents: ", e);
     }
