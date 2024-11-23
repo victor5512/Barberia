@@ -15,6 +15,7 @@ import {
 } from '@mui/x-data-grid';
 import { readItems, deleteItem, createItem, updateItem } from './servicios/firebase';
 import { useAppContext } from './Context/appContext';
+import { useTheme } from '@mui/material/styles';
 
 function EditToolbar({ setRows, setRowModesModel }) {
   const handleClick = () => {
@@ -42,7 +43,7 @@ export default function FullFeaturedCrudGrid() {
   const { objectData, updateObject } = useAppContext();
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
-
+  const theme = useTheme();
   // Cargar datos de Firestore
   useEffect(() => {
     const fetchCitas = async () => {
@@ -146,7 +147,8 @@ export default function FullFeaturedCrudGrid() {
   ];
 
   return (
-    <Box sx={{ height: 500, width: '100%' }}>
+    <Box sx={{ height: 500, width: '100%',
+      bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'white', }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -160,6 +162,9 @@ export default function FullFeaturedCrudGrid() {
         }}
         slotProps={{
           toolbar: { setRows, setRowModesModel },
+        }}
+        sx={{
+          color: theme.palette.mode === 'dark' ? 'white' : 'black',
         }}
       />
     </Box>
