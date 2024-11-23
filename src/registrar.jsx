@@ -21,7 +21,6 @@ export default function Registrar() {
   const defaultTheme = createTheme();
 
   const [formData, setFormData] = React.useState({
-    phone: "",
     email: "",
     password: ""
   });
@@ -39,10 +38,29 @@ export default function Registrar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Validación de correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSnackbarMessage("Por favor, ingresa un correo electrónico válido.");
+      setSnackbarSeverity("error");
+      setOpen(true);
+      return;
+    }
+  
+    // Validación de contraseña
+    if (formData.password.length <= 6) {
+      setSnackbarMessage("La contraseña debe tener más de 6 caracteres.");
+      setSnackbarSeverity("error");
+      setOpen(true);
+      return;
+    }
+  
     try {
       await registerUser(formData.email, formData.password);
       setSnackbarMessage("Usuario registrado exitosamente");
       setSnackbarSeverity("success");
+      setFormData({ email: "", password: "" });
       setOpen(true);
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
@@ -50,7 +68,7 @@ export default function Registrar() {
       setSnackbarSeverity("error");
       setOpen(true);
     }
-  };
+  };  
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
