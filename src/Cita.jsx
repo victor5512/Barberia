@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { Formik, Form, Field } from 'formik';
-import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, Typography } from '@mui/material';
+import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, Typography,Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions, } from '@mui/material';
 import { createItemId } from "./servicios/firebase";
 import { useAppContext } from './Context/appContext';
 
 export default function RegistroCita({onClose, serv}) {
   const { enqueueSnackbar } = useSnackbar();
   const { objectData, updateObject } = useAppContext();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const today = new Date().toLocaleDateString();
   const initialValues = {
@@ -21,10 +26,11 @@ export default function RegistroCita({onClose, serv}) {
 
   const CitaSchema = Yup.object().shape({
     nombre: Yup.string().required('El nombre es obligatorio'),
-    telefono: Yup.string()
-      .matches(/^\d+$/, 'Debe contener solo números')
-      .min(10, 'El número debe tener al menos 10 dígitos')
-      .required('El teléfono es obligatorio'),
+    telefono: Yup.number()
+    .required('El numero es necesario')
+    .typeError('Debe ser un número')
+    .min(1, 'Debe ser un número valido')
+    .integer('Debe ser un número valido'),
     fecha: Yup.string().required('La fecha es obligatoria'),
     hora: Yup.string().required('La hora es obligatoria'),
     servicio: Yup.string().required('El servicio es obligatorio'),
@@ -36,15 +42,23 @@ export default function RegistroCita({onClose, serv}) {
         ...values,
         usuario: objectData.uid
       };
+      if (!objectData || Object.keys(objectData).length === 0) {
+        enqueueSnackbar('Por favor, inicie sesión para registrar una cita. ');
+      }else{
       await createItemId("citas", values);
       enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       resetForm();
       onClose();
+      }
     } catch (error) {
       enqueueSnackbar('Error al registrar la cita: ' + error.message, { variant: 'error' });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   return (
@@ -56,7 +70,7 @@ export default function RegistroCita({onClose, serv}) {
       {({ errors, touched, isSubmitting }) => (
         <Form autoComplete="off" noValidate>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Grid>
+            <Grid >
               <Grid item xs={12} md={8}>
                 <Card sx={{ p: 6 }}>
                   <Typography variant="h5" gutterBottom>
@@ -68,6 +82,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Nombre"
                       name="nombre"
+                      type="Number"
                       error={Boolean(touched.nombre && errors.nombre)}
                       helperText={touched.nombre && errors.nombre}
                     />
@@ -76,6 +91,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Teléfono"
                       name="telefono"
+                      inputProps={{ maxLength: 10 }}
                       error={Boolean(touched.telefono && errors.telefono)}
                       helperText={touched.telefono && errors.telefono}
                     />
@@ -132,6 +148,17 @@ export default function RegistroCita({onClose, serv}) {
           </Box>
         </Form>
       )}
+      {/* <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+          <DialogTitle>Acceso Restringido</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Por favor, inicie sesión para registrar una cita.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog} color="primary">Cerrar</Button>
+          </DialogActions>
+        </Dialog> */}
     </Formik>
   );
 }

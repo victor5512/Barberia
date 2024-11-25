@@ -87,19 +87,19 @@ const servicesDataVictor = [
     title: "Mascarilla de arcilla",
     description: "Es eficiente",
     price: "MX$150",
-    imageUrl: "../src/img/imgpage/imgmascarilla/mascarillaarcilla.jpg",
+    imageUrl: "../src/img/mascarillaarcilla.jpg",
   },
   {
     title: "Mascarilla de Carbon",
     description: "Es uno de los más populares",
     price: "MX$250",
-    imageUrl: "../src/img/imgpage/imgmascarilla/mascarillacarbon.jpg",
+    imageUrl: "../src/img/mascarillacarbon.jpg",
   },
   {
     title: "Mascarilla hidratante",
     description: "Es uno de las mejores",
     price: "MX$280",
-    imageUrl: "../src/img/imgpage/imgmascarilla/mascarillahidratante.jpg",
+    imageUrl: "../src/img/mascarillahidratante.jpg",
   },
 ];
 
@@ -110,7 +110,7 @@ export default function Mascarilla() {
 
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
   const [open, setOpen] = React.useState(false);
 
@@ -150,7 +150,7 @@ export default function Mascarilla() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/imgmascarilla/mascarillamediacara.jpg" // Cambia por la ruta de tu imagen
+        image="../src/img/mascarillamediacara.jpg" // Cambia por la ruta de tu imagen
         
         alt="mascarilla"
         sx={{ maxWidth: "600px", margin: "auto" }}
