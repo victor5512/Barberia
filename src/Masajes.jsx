@@ -86,19 +86,19 @@ const servicesDataVictor = [
     title: "Masaje Facial",
     description: "Masaje facial con delicadesa",
     price: "MX$100",
-    imageUrl: "../src/img/imgpage/imgmasajes/masajefacial.jpg",
+    imageUrl: "../src/img/masajefacial.jpg",
   },
   {
     title: "Masaje de hombros",
     description: "Masaje solo de hombros",
     price: "MX$150",
-    imageUrl: "../src/img/imgpage/imgmasajes/masajehombros.jpg",
+    imageUrl: "../src/img/masajehombros.jpg",
   },
   {
     title: "Masaje poscorte",
     description: "Masaje y después un corte",
     price: "MX$250",
-    imageUrl: "../src/img/imgpage/imgmasajes/masajeposcorte.jpg",
+    imageUrl: "../src/img/masajeposcorte.jpg",
   },
 ];
 
@@ -147,7 +147,7 @@ export default function Tratamiento() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/imgmasajes/masajecabeza.jpg" // Cambia por la ruta de tu imagen
+        image="../src/img/masajecabeza.jpg" // Cambia por la ruta de tu imagen
         alt="Masajes"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />

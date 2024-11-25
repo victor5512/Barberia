@@ -85,19 +85,19 @@ const servicesDataVictor = [
     title: "Ceja doble línea",
     description: "Ceja doble línea",
     price: "MX$60",
-    imageUrl: "../src/img/imgpage/imggrecas/cejadoblelinea.jpg",
+    imageUrl: "../src/img/cejadoblelinea.jpg",
   },
   {
     title: "Ceja de una sola línea",
     description: "Para estar a la moda",
     price: "MX$70",
-    imageUrl: "../src/img/imgpage/imggrecas/cejalinea.jpg",
+    imageUrl: "../src/img/cejalinea.jpg",
   },
   {
     title: "Ceja en forma de X",
     description: "Uno de las grandes estilos fantasticos",
     price: "MX$90",
-    imageUrl: "../src/img/imgpage/imggrecas/cejax.jpg",
+    imageUrl: "../src/img/cejax.jpg",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function GrecasCejas() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/greca1.jpg" // Cambia por la ruta de tu imagen
+        image="../src/img/greca1.jpg" // Cambia por la ruta de tu imagen
         alt="Grecas cejas"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />

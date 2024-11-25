@@ -85,19 +85,19 @@ const servicesData = [
     title: "Arreglo de Barba con Aceite",
     description: "El arreglo con aceite",
     price: "MX$250",
-    imageUrl: "../src/img/imgpage/imgbarba/aceitebarba.jpg",
+    imageUrl: "../src/img/aceitebarba.jpg",
   },
   {
     title: "Arreglo con Shampoo",
     description: "El shampoo es buenisimo para suavizar la barba",
     price: "MX$300",
-    imageUrl: "../src/img/imgpage/imgbarba/shampoobarba.jpg",
+    imageUrl: "../src/img/shampoobarba.jpg",
   },
   {
     title: "Arreglo con exfoliación de miel",
     description: "El cambio es en cuestión de minutos",
     price: "MX$500",
-    imageUrl: "../src/img/imgpage/imgbarba/suerobarba.jpg",
+    imageUrl: "../src/img/suerobarba.jpg",
   },
 ];
 
@@ -132,7 +132,7 @@ export default function Arreglobarba() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/cortebarba.jpg" // Cambia por la ruta de tu imagen
+        image="../src/img/cortebarba.jpg" // Cambia por la ruta de tu imagen
         alt="Arreglo de Barba"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />
