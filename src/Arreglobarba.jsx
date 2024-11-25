@@ -113,7 +113,7 @@ export default function Arreglobarba() {
 
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
 
   return (

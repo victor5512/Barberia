@@ -160,10 +160,7 @@ export default function Login() {
                   },
                 }}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" sx={{ color: 'black', '&.Mui-checked': { color: 'black' } }} />}
-                label="Recordarme"
-              />
+              
               <Button
                 type="submit"
                 fullWidth

@@ -107,7 +107,7 @@ export default function Tratamiento() {
   const { darkMode } = useDarkMode() || {}; // Usar el contexto de dark mode
   const navigate = useNavigate();
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
   const [open, setOpen] = React.useState(false);
 

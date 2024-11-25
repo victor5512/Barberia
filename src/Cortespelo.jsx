@@ -105,7 +105,7 @@ export default function CorteDePelo() {
   const { objectData, updateObject } = useAppContext();
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
   const { darkMode } = useDarkMode() || {}; 
   const { state, dispatch } = useAppContext();
