@@ -23,6 +23,7 @@ import DarkModeIcon from "@mui/icons-material/Brightness2"; // Icono de luna
 import LightModeIcon from "@mui/icons-material/WbSunny"; // Icono de sol;
 import { useDarkMode } from "../Context/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../Context/appContext";
 import HomeIcon from "@mui/icons-material/Home";
 import {
   Button,
@@ -32,6 +33,11 @@ import {
   Grid,
   Drawer,
   Switch,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   transition: "transform 0.3s ease, box-shadow 0.3s ease", // Transición
@@ -82,7 +88,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const { objectData } = useAppContext();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const storedDarkMode = localStorage.getItem("darkMode") === "true";
   const { darkMode, toggleDarkMode } = useDarkMode();
 
@@ -132,7 +140,11 @@ export default function NavBar() {
   }, [darkMode]);
 
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navega a la página del calendario
+    if (!objectData || Object.keys(objectData).length === 0) {
+      setDialogOpen(true); // Muestra el diálogo si objectData está vacío
+    } else {
+      navigate("/Calendar"); // Navega al calendario
+    }
   };
   // const goToStore = () => {
   //   navigate("/Store"); //navega a pagina de tienda
@@ -143,6 +155,10 @@ export default function NavBar() {
 
   const goToHouse = () => {
     navigate("/");
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   // Función para abrir y cerrar el Drawer
@@ -297,6 +313,17 @@ export default function NavBar() {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {renderDrawer()}
       </Drawer>
+      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+          <DialogTitle>Acceso Restringido</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Por favor, inicie sesión para acceder al calendario.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog} color="primary">Cerrar</Button>
+          </DialogActions>
+        </Dialog>
     </Box>
   );
 }
