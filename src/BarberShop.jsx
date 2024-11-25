@@ -35,37 +35,37 @@ const servicesDataVictor = [
     title: "Servicio 1",
     description: "Corte de Pelo.",
     price: "MX$200",
-    imageUrl: "../src/img/imgpage/serv1.jpg",
+    imageUrl: "../src/img/serv1.jpg",
   },
   {
     title: "Servicio 2",
     description: "Coloración de cabello.",
     price: "MX$500",
-    imageUrl: "../src/img/imgpage/coloracion.jpg",
+    imageUrl: "../src/img/coloracion.jpg",
   },
   {
     title: "Servicio 3",
     description: "Arreglo de Barba.",
     price: "MX$150",
-    imageUrl: "../src/img/imgpage/cortebarba.jpg",
+    imageUrl: "../src/img/cortebarba.jpg",
   },
   {
     title: "Servicio 4",
     description: "Grecas y corte de cejas.",
     price: "MX$50",
-    imageUrl: "../src/img/imgpage/greca1.jpg",
+    imageUrl: "../src/img/greca1.jpg",
   },
   {
     title: "Servicio 5",
     description: "Masajes.",
     price: "MX$500",
-    imageUrl: "../src/img/imgpage/imgmasajes/masajecabeza.jpg",
+    imageUrl: "../src/img/masajecabeza.jpg",
   },
   {
     title: "Servicio 6",
     description: "Mascarilla.",
     price: "MX$100",
-    imageUrl: "../src/img/imgpage/imgmascarilla/mascarillamediacara.jpg",
+    imageUrl: "../src/img/mascarillamediacara.jpg",
   },
 ];
 

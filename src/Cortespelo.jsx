@@ -85,19 +85,19 @@ const servicesDataVictor = [
     title: "Corte Undercut",
     description: "Es un corte audaz y moderno",
     price: "MX$150",
-    imageUrl: "../src/img/imgpage/undercut.jpg",
+    imageUrl: "../src/img/undercut.jpg",
   },
   {
     title: "Corte Fade",
     description: "Es uno de los más populares",
     price: "MX$250",
-    imageUrl: "../src/img/imgpage/fade.jpg",
+    imageUrl: "../src/img/fade.jpg",
   },
   {
     title: "Corte Mullet",
     description: "Es uno de los mejores",
     price: "MX$280",
-    imageUrl: "../src/img/imgpage/mullet.jpg",
+    imageUrl: "../src/img/mullet.jpg",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function CorteDePelo() {
   const { objectData, updateObject } = useAppContext();
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
   const { darkMode } = useDarkMode() || {}; 
   const { state, dispatch } = useAppContext();
@@ -143,7 +143,7 @@ export default function CorteDePelo() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/serv1.jpg" // Cambia por la ruta de tu imagen
+        image="../src/img/serv1.jpg" // Cambia por la ruta de tu imagen
         alt="Corte de Pelo"
         
         sx={{ maxWidth: "600px", margin: "auto" }}

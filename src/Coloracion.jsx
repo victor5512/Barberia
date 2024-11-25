@@ -85,19 +85,19 @@ const servicesDataVictor = [
     title: "Tinte Rubio",
     description: "Realza el color Rubio para tu cabello.",
     price: "MX$350",
-    imageUrl: "../src/img/imgpage/imgcoloracion/rubioclaro.jpg", // Ruta válida
+    imageUrl: "../src/img/rubioclaro.jpg", // Ruta válida
   },
   {
     title: "Tinte Cobrizo",
     description: "Agrega estilo con mechas personalizadas.",
     price: "MX$450",
-    imageUrl: "../src/img/imgpage/imgcoloracion/tintecobrizo.jpg", // Ruta válida
+    imageUrl: "../src/img/tintecobrizo.jpg", // Ruta válida
   },
   {
     title: "Decoloración",
     description: "Transforma tu look con un nuevo tono.",
     price: "MX$600",
-    imageUrl: "../src/img/imgpage/imgcoloracion/tintegris.jpg", // Ruta válida
+    imageUrl: "../src/img/tintegris.jpg", // Ruta válida
   },
 ];
 
@@ -108,7 +108,7 @@ export default function Coloracion() {
 
   // Función para navegar a la página de agendar cita
   const goToCalendar = () => {
-    navigate("/Calendar"); // Navegar a la página del calendario
+    // navigate("/Calendar"); // Navegar a la página del calendario
   };
   const [open, setOpen] = React.useState(false);
 
@@ -141,7 +141,7 @@ export default function Coloracion() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/imgpage/coloracion.jpg" // Ruta válida
+        image="../src/img/coloracion.jpg" // Ruta válida
         alt="Coloración de Pelo"
         sx={{ maxWidth: "600px", margin: "auto", borderRadius: "8px" }}
       />
