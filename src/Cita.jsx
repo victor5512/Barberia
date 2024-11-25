@@ -70,7 +70,7 @@ export default function RegistroCita({onClose, serv}) {
       {({ errors, touched, isSubmitting }) => (
         <Form autoComplete="off" noValidate>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Grid>
+            <Grid >
               <Grid item xs={12} md={8}>
                 <Card sx={{ p: 6 }}>
                   <Typography variant="h5" gutterBottom>

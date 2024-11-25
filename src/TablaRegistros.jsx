@@ -147,6 +147,10 @@ export default function FullFeaturedCrudGrid() {
   ];
 
   return (
+    <Box>
+      <Box>
+         a
+      </Box>
     <Box sx={{ height: 500, width: '100%',
       bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'white', }}>
       <DataGrid
@@ -157,9 +161,9 @@ export default function FullFeaturedCrudGrid() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
+        // slots={{
+        //   toolbar: EditToolbar,
+        // }}
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
@@ -167,6 +171,7 @@ export default function FullFeaturedCrudGrid() {
           color: theme.palette.mode === 'dark' ? 'white' : 'black',
         }}
       />
+    </Box>
     </Box>
   );
 }

@@ -88,11 +88,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const { objectData } = useAppContext();
+  const { objectData, updateObject } = useAppContext();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpenus, setDialogOpenus] = useState(false);
   const storedDarkMode = localStorage.getItem("darkMode") === "true";
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+
+  const handleLogout = () => {
+    updateObject({}); // Limpia el objeto
+    setLogoutDialogOpen(false); // Cierra el diálogo
+    navigate("/Login"); // Redirige al login
+  };
+  const handleCloseLogoutDialog = () => {
+    setLogoutDialogOpen(false);
+  };
 
   // Tema dinámico según el estado de `darkMode`
   const theme = createTheme({
@@ -150,7 +161,11 @@ export default function NavBar() {
   //   navigate("/Store"); //navega a pagina de tienda
   // };
   const goToLogin = () => {
+    if (!objectData || Object.keys(objectData).length === 0) {
     navigate("/Login");
+    }else {
+      setLogoutDialogOpen(true); 
+    }
   };
 
   const goToHouse = () => {
@@ -248,10 +263,10 @@ export default function NavBar() {
             component="div"
             sx={{ color: theme.palette.text.primary, display: { xs: "none", sm: "block" } }}
           >
-            BarberShop
+            BarberiaVEM
           </Typography>
 
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon sx={{ color: theme.palette.text.primary }}/>
             </SearchIconWrapper>
@@ -260,7 +275,7 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
               sx={{ color: theme.palette.text.primary }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <StyledIconButton
@@ -313,6 +328,23 @@ export default function NavBar() {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {renderDrawer()}
       </Drawer>
+      {/* Diálogo de confirmación para cerrar sesión */}
+      <Dialog open={logoutDialogOpen} onClose={handleCloseLogoutDialog}>
+        <DialogTitle>¿Está seguro de cerrar sesión?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Al cerrar sesión, se eliminarán los datos almacenados temporalmente.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseLogoutDialog} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleLogout} color="secondary">
+            Cerrar sesión
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
           <DialogTitle>Acceso Restringido</DialogTitle>
           <DialogContent>
