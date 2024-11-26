@@ -7,7 +7,7 @@ import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, 
   DialogContent,
   DialogContentText,
   DialogActions, } from '@mui/material';
-import { createItemId } from "./servicios/firebase";
+import { createItemIdEdgar } from "./servicios/firebase";
 import { useAppContext } from './Context/appContext';
 
 export default function RegistroCita({onClose, serv}) {
@@ -45,7 +45,7 @@ export default function RegistroCita({onClose, serv}) {
       if (!objectData || Object.keys(objectData).length === 0) {
         enqueueSnackbar('Por favor, inicie sesión para registrar una cita. ');
       }else{
-      await createItemId("citas", values);
+      await createItemIdEdgar("citas", values);
       enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       resetForm();
       onClose();
