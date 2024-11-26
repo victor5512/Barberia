@@ -4,6 +4,10 @@ import { Box, Typography, Card, CardContent,IconButton,DialogContent, CardMedia,
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 import CloseIcon from '@mui/icons-material/Close';
 import Citas from './Cita';
+import rubioclaro from "../src/img/rubioclaro.jpg";
+import tintecobrizo from "../src/img/tintecobrizo.jpg";
+import tintegris from "../src/img/tintegris.jpg";
+import coloracion from "../src/img/coloracion.jpg";
 import { useAppContext } from './Context/appContext';
 import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
@@ -85,19 +89,19 @@ const servicesDataVictor = [
     title: "Tinte Rubio",
     description: "Realza el color Rubio para tu cabello.",
     price: "MX$350",
-    imageUrl: "../src/img/rubioclaro.jpg", // Ruta válida
+    imageUrl: rubioclaro, // Ruta válida
   },
   {
     title: "Tinte Cobrizo",
     description: "Agrega estilo con mechas personalizadas.",
     price: "MX$450",
-    imageUrl: "../src/img/tintecobrizo.jpg", // Ruta válida
+    imageUrl: tintecobrizo, // Ruta válida
   },
   {
     title: "Decoloración",
     description: "Transforma tu look con un nuevo tono.",
     price: "MX$600",
-    imageUrl: "../src/img/tintegris.jpg", // Ruta válida
+    imageUrl: tintegris, // Ruta válida
   },
 ];
 
@@ -141,7 +145,7 @@ export default function Coloracion() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/coloracion.jpg" // Ruta válida
+        image={coloracion} // Ruta válida
         alt="Coloración de Pelo"
         sx={{ maxWidth: "600px", margin: "auto", borderRadius: "8px" }}
       />

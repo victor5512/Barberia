@@ -92,7 +92,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Teléfono"
                       name="telefono"
-                      type="Number"
+                      type="tel"
                       inputProps={{ maxLength: 10 }}
                       error={Boolean(touched.telefono && errors.telefono)}
                       helperText={touched.telefono && errors.telefono}
