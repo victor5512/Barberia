@@ -5,6 +5,10 @@ import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, Di
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import Citas from './Cita'; 
+import undercut from "../src/img/undercut.jpg";
+import fade from "../src/img/fade.jpg";
+import mullet from "../src/img/mullet.jpg";
+import serv1 from "../src/img/serv1.jpg";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
@@ -85,19 +89,19 @@ const servicesDataVictor = [
     title: "Corte Undercut",
     description: "Es un corte audaz y moderno",
     price: "MX$150",
-    imageUrl: "../src/img/undercut.jpg",
+    imageUrl: undercut,
   },
   {
     title: "Corte Fade",
     description: "Es uno de los más populares",
     price: "MX$250",
-    imageUrl: "../src/img/fade.jpg",
+    imageUrl: fade,
   },
   {
     title: "Corte Mullet",
     description: "Es uno de los mejores",
     price: "MX$280",
-    imageUrl: "../src/img/mullet.jpg",
+    imageUrl: mullet,
   },
 ];
 
@@ -143,7 +147,7 @@ export default function CorteDePelo() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/serv1.jpg" // Cambia por la ruta de tu imagen
+        image={serv1} // Cambia por la ruta de tu imagen
         alt="Corte de Pelo"
         
         sx={{ maxWidth: "600px", margin: "auto" }}

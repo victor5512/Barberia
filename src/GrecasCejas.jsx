@@ -4,6 +4,10 @@ import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, Di
 import Citas from './Cita';
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
+import cejadoblelinea from "../src/img/cejadoblelinea.jpg";
+import cejalinea from "../src/img/cejalinea.jpg";
+import cejax from "../src/img/cejax.jpg";
+import greca1 from "../src/img/greca1.jpg";
 import { useDarkMode } from "./Context/ThemeContext";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
@@ -85,19 +89,19 @@ const servicesDataVictor = [
     title: "Ceja doble línea",
     description: "Ceja doble línea",
     price: "MX$60",
-    imageUrl: "../src/img/cejadoblelinea.jpg",
+    imageUrl: cejadoblelinea,
   },
   {
     title: "Ceja de una sola línea",
     description: "Para estar a la moda",
     price: "MX$70",
-    imageUrl: "../src/img/cejalinea.jpg",
+    imageUrl: cejalinea,
   },
   {
     title: "Ceja en forma de X",
     description: "Uno de las grandes estilos fantasticos",
     price: "MX$90",
-    imageUrl: "../src/img/cejax.jpg",
+    imageUrl: cejax,
   },
 ];
 
@@ -149,7 +153,7 @@ export default function GrecasCejas() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/greca1.jpg" // Cambia por la ruta de tu imagen
+        image={greca1} // Cambia por la ruta de tu imagen
         alt="Grecas cejas"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />

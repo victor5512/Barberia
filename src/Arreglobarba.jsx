@@ -2,6 +2,10 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import Citas from './Cita';
+import aceitebarba from "../src/img/aceitebarba.jpg";
+import shampoobarba from "../src/img/shampoobarba.jpg";
+import suerobarba from "../src/img/suerobarba.jpg";
+import cortebarba from "../src/img/cortebarba.jpg";
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom"; // Para la navegación
@@ -85,19 +89,19 @@ const servicesData = [
     title: "Arreglo de Barba con Aceite",
     description: "El arreglo con aceite",
     price: "MX$250",
-    imageUrl: "../src/img/aceitebarba.jpg",
+    imageUrl: aceitebarba,
   },
   {
     title: "Arreglo con Shampoo",
     description: "El shampoo es buenisimo para suavizar la barba",
     price: "MX$300",
-    imageUrl: "../src/img/shampoobarba.jpg",
+    imageUrl: shampoobarba,
   },
   {
     title: "Arreglo con exfoliación de miel",
     description: "El cambio es en cuestión de minutos",
     price: "MX$500",
-    imageUrl: "../src/img/suerobarba.jpg",
+    imageUrl: suerobarba,
   },
 ];
 
@@ -132,7 +136,7 @@ export default function Arreglobarba() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/cortebarba.jpg" // Cambia por la ruta de tu imagen
+        image={cortebarba} // Cambia por la ruta de tu imagen
         alt="Arreglo de Barba"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />

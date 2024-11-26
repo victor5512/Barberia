@@ -6,6 +6,10 @@ import {Box, Typography, Card, CardContent, CardMedia, Button, Grid, Dialog, Dia
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 import Citas from './Cita';
+import masajefacial from "../src/img/masajefacial.jpg";
+import masajehombros from "../src/img/masajehombros.jpg";
+import masajeposcorte from "../src/img/masajeposcorte.jpg";
+import masajecabeza from "../src/img/masajecabeza.jpg";
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -86,19 +90,19 @@ const servicesDataVictor = [
     title: "Masaje Facial",
     description: "Masaje facial con delicadesa",
     price: "MX$100",
-    imageUrl: "../src/img/masajefacial.jpg",
+    imageUrl: masajefacial,
   },
   {
     title: "Masaje de hombros",
     description: "Masaje solo de hombros",
     price: "MX$150",
-    imageUrl: "../src/img/masajehombros.jpg",
+    imageUrl: masajehombros,
   },
   {
     title: "Masaje poscorte",
     description: "Masaje y después un corte",
     price: "MX$250",
-    imageUrl: "../src/img/masajeposcorte.jpg",
+    imageUrl: masajeposcorte,
   },
 ];
 
@@ -147,7 +151,7 @@ export default function Tratamiento() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/masajecabeza.jpg" // Cambia por la ruta de tu imagen
+        image={masajecabeza} // Cambia por la ruta de tu imagen
         alt="Masajes"
         sx={{ maxWidth: "600px", margin: "auto" }}
       />

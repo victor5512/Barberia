@@ -7,6 +7,10 @@ import {
 import Citas from './Cita';
 import { useAppContext } from './Context/appContext';
 import CloseIcon from '@mui/icons-material/Close';
+import mascarillamediacara from "../src/img/mascarillamediacara.jpg";
+import mascarillaarcilla from "../src/img/mascarillaarcilla.jpg";
+import mascarillacarbon from "../src/img/mascarillacarbon.jpg";
+import mascarillahidratante from "../src/img/mascarillahidratante.jpg";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import ContentCutIcon from "@mui/icons-material/ContentCut"; // Ícono de barbería
 
@@ -87,19 +91,19 @@ const servicesDataVictor = [
     title: "Mascarilla de arcilla",
     description: "Es eficiente",
     price: "MX$150",
-    imageUrl: "../src/img/mascarillaarcilla.jpg",
+    imageUrl: mascarillaarcilla,
   },
   {
     title: "Mascarilla de Carbon",
     description: "Es uno de los más populares",
     price: "MX$250",
-    imageUrl: "../src/img/mascarillacarbon.jpg",
+    imageUrl: mascarillacarbon,
   },
   {
     title: "Mascarilla hidratante",
     description: "Es uno de las mejores",
     price: "MX$280",
-    imageUrl: "../src/img/mascarillahidratante.jpg",
+    imageUrl: mascarillahidratante,
   },
 ];
 
@@ -150,7 +154,7 @@ export default function Mascarilla() {
       <CardMedia
         component="img"
         height="300"
-        image="../src/img/mascarillamediacara.jpg" // Cambia por la ruta de tu imagen
+        image = {mascarillamediacara} // Cambia por la ruta de tu imagen
         
         alt="mascarilla"
         sx={{ maxWidth: "600px", margin: "auto" }}
