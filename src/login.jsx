@@ -16,7 +16,7 @@ import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom"; // Para la navegación
 import { loginAcc } from "./servicios/firebase";
-import { loginUser, signInWithGoogle } from "./servicios/login"; // El método para autenticación
+import { loginUserEdgar, signInWithGoogleEdgar } from "./servicios/login"; // El método para autenticación
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
 import GoogleIcon from '@mui/icons-material/Google';
@@ -43,7 +43,7 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     try {
-      const us = await signInWithGoogle();
+      const us = await signInWithGoogleEdgar();
       if (us.emailVerified) {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
@@ -66,7 +66,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await loginUser(email, password);
+      const user = await loginUserEdgar(email, password);
       if (user) {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");

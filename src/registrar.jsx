@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
 import { createItem } from "./servicios/firebase";
-import { registerUser } from "./servicios/login"
+import { registerUserEdgar } from "./servicios/login"
 
 
 export default function Registrar() {
@@ -57,7 +57,7 @@ export default function Registrar() {
     }
   
     try {
-      await registerUser(formData.email, formData.password);
+      await registerUserEdgar(formData.email, formData.password);
       setSnackbarMessage("Usuario registrado exitosamente");
       setSnackbarSeverity("success");
       setFormData({ email: "", password: "" });
