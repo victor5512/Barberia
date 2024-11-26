@@ -13,7 +13,7 @@ import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
-import { createItem } from "./servicios/firebase";
+import { createItemEdgar } from "./servicios/firebase";
 import { registerUserEdgar } from "./servicios/login"
 
 

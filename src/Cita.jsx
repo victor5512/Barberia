@@ -38,11 +38,12 @@ export default function RegistroCita({onClose, serv}) {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+      console.log("objet",objectData)
       values = {
         ...values,
         usuario: objectData.uid
       };
-      if (!objectData || Object.keys(objectData).length === 0) {
+      if (!objectData) {
         enqueueSnackbar('Por favor, inicie sesión para registrar una cita. ');
       }else{
       await createItemIdEdgar("citas", values);
@@ -82,7 +83,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Nombre"
                       name="nombre"
-                      type="Number"
+                      
                       error={Boolean(touched.nombre && errors.nombre)}
                       helperText={touched.nombre && errors.nombre}
                     />
@@ -91,6 +92,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Teléfono"
                       name="telefono"
+                      type="Number"
                       inputProps={{ maxLength: 10 }}
                       error={Boolean(touched.telefono && errors.telefono)}
                       helperText={touched.telefono && errors.telefono}
