@@ -43,7 +43,7 @@ export default function RegistroCita({onClose, serv}) {
         ...values,
         usuario: objectData.uid
       };
-      if (!objectData) {
+      if (!objectData || Object.keys(objectData).length === 0) {
         enqueueSnackbar('Por favor, inicie sesión para registrar una cita. ');
       }else{
       await createItemIdEdgar("citas", values);
