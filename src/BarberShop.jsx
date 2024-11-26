@@ -10,6 +10,12 @@ import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import "@fontsource/rajdhani/500.css";
 import fondo1 from "../src/img/fondo_inicial.jpg";
+import serv1 from "../src/img/serv1.jpg";
+import serv2 from "../src/img/coloracion.jpg";
+import serv3 from "../src/img/cortebarba.jpg";
+import serv4 from "../src/img/greca1.jpg";
+import serv5 from "../src/img/masajecabeza.jpg";
+import serv6 from "../src/img/mascarillamediacara.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDarkMode } from "./Context/ThemeContext.jsx"; // Importar el hook
 
@@ -35,37 +41,37 @@ const servicesDataVictor = [
     title: "Servicio 1",
     description: "Corte de Pelo.",
     price: "MX$200",
-    imageUrl: "../src/img/serv1.jpg",
+    imageUrl: serv1,
   },
   {
     title: "Servicio 2",
     description: "Coloración de cabello.",
     price: "MX$500",
-    imageUrl: "../src/img/coloracion.jpg",
+    imageUrl: serv2,
   },
   {
     title: "Servicio 3",
     description: "Arreglo de Barba.",
     price: "MX$150",
-    imageUrl: "../src/img/cortebarba.jpg",
+    imageUrl: serv3,
   },
   {
     title: "Servicio 4",
     description: "Grecas y corte de cejas.",
     price: "MX$50",
-    imageUrl: "../src/img/greca1.jpg",
+    imageUrl: serv4,
   },
   {
     title: "Servicio 5",
     description: "Masajes.",
     price: "MX$500",
-    imageUrl: "../src/img/masajecabeza.jpg",
+    imageUrl: serv5,
   },
   {
     title: "Servicio 6",
     description: "Mascarilla.",
     price: "MX$100",
-    imageUrl: "../src/img/mascarillamediacara.jpg",
+    imageUrl: serv6,
   },
 ];
 
