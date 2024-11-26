@@ -151,6 +151,7 @@ export default function NavBar() {
   }, [darkMode]);
 
   const goToCalendar = () => {
+    console.log("obj",objectData)
     if (!objectData || Object.keys(objectData).length === 0) {
       setDialogOpen(true); // Muestra el diálogo si objectData está vacío
     } else {

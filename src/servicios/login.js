@@ -6,7 +6,7 @@ import { app } from "./firebase"
 const provider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
-export const signInWithGoogle = async () => {
+export const signInWithGoogleEdgar = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     // Obtén el token de acceso de Google
@@ -25,7 +25,7 @@ export const signInWithGoogle = async () => {
     console.error("Error al iniciar sesión con Google:", errorCode, errorMessage, email, credential);
   }
 };
-export const registerUser = async (email, password) => {
+export const registerUserEdgar = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
@@ -37,12 +37,12 @@ export const registerUser = async (email, password) => {
 };
 
 // Función para iniciar sesión de usuario
-export const loginUser = async (email, password) => {
+export const loginUserEdgar = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("Usuario iniciado sesión:", user);
-    return true;
+    return user;
   } catch (error) {
     console.error("Error al iniciar sesión:", error.code, error.message);
   }

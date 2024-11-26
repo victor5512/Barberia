@@ -7,7 +7,7 @@ import { Button, Box, Grid, Card, Stack, TextField, MenuItem, CircularProgress, 
   DialogContent,
   DialogContentText,
   DialogActions, } from '@mui/material';
-import { createItemId } from "./servicios/firebase";
+import { createItemIdEdgar } from "./servicios/firebase";
 import { useAppContext } from './Context/appContext';
 
 export default function RegistroCita({onClose, serv}) {
@@ -38,14 +38,15 @@ export default function RegistroCita({onClose, serv}) {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+      console.log("objet",objectData)
       values = {
         ...values,
         usuario: objectData.uid
       };
-      if (!objectData || Object.keys(objectData).length === 0) {
+      if (!objectData) {
         enqueueSnackbar('Por favor, inicie sesión para registrar una cita. ');
       }else{
-      await createItemId("citas", values);
+      await createItemIdEdgar("citas", values);
       enqueueSnackbar('Cita registrada exitosamente.', { variant: 'success' });
       resetForm();
       onClose();
@@ -82,7 +83,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Nombre"
                       name="nombre"
-                      type="Number"
+                      
                       error={Boolean(touched.nombre && errors.nombre)}
                       helperText={touched.nombre && errors.nombre}
                     />
@@ -91,6 +92,7 @@ export default function RegistroCita({onClose, serv}) {
                       fullWidth
                       label="Teléfono"
                       name="telefono"
+                      type="Number"
                       inputProps={{ maxLength: 10 }}
                       error={Boolean(touched.telefono && errors.telefono)}
                       helperText={touched.telefono && errors.telefono}

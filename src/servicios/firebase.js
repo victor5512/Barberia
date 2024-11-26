@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, query, where,doc, getDoc, setDoc, increment } from "firebase/firestore"; 
 
-// Your web app's Firebase configuration
+// Configuracion a la base
 const firebaseConfig = {
   apiKey: "AIzaSyDPiOLfGgybytWLryxYiuHcpP6prcDnXvI",
   authDomain: "barberia-vem.firebaseapp.com",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-export const createItem = async (data,colec) => {
+export const createItemEdgar = async (data,colec) => {
     try {
       const docRef = await addDoc(collection(db, colec), data);
       console.log("Document written with ID: ", docRef.id);
@@ -24,7 +24,7 @@ export const createItem = async (data,colec) => {
     }
 };
 
-export const readItems = async (usuario) => {
+export const readItemsEdgar = async (usuario) => {
     try {
       const q = query(collection(db, "citas"), where("usuario", "==", usuario));
       const querySnapshot = await getDocs(q);
@@ -38,7 +38,7 @@ export const readItems = async (usuario) => {
     }
 };
 
-export const updateItem = async (id, updatedData) => {
+export const updateItemEdgar = async (id, updatedData) => {
     const docRef = doc(db, "citas", id);
   
     try {
@@ -49,7 +49,7 @@ export const updateItem = async (id, updatedData) => {
     }
 };
 
-export const deleteItem = async (id) => {
+export const deleteItemEdgar = async (id) => {
     const docRef = doc(db, "citas", id);
   
     try {
@@ -60,7 +60,7 @@ export const deleteItem = async (id) => {
     }
 };
 
-export const loginAcc = async (usuario, pass) => {
+export const loginAccEdgar = async (usuario, pass) => {
   const q = query(
     collection(db, "Login"),
     where("email"||"phone", "==", usuario),
@@ -95,7 +95,7 @@ const getNextId = async () => {
 }
 };
 
-export const createItemId = async (name, data) => {
+export const createItemIdEdgar = async (name, data) => {
   if (!name || typeof data !== 'object') {
     console.error("Invalid parameters");
     return;

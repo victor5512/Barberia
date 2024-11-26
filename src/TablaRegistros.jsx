@@ -13,7 +13,7 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
-import { readItems, deleteItem, createItem, updateItem } from './servicios/firebase';
+import { readItemsEdgar, deleteItemEdgar, createItemEdgar, updateItemEdgar } from './servicios/firebase';
 import { useAppContext } from './Context/appContext';
 import { useTheme } from '@mui/material/styles';
 
@@ -47,7 +47,7 @@ export default function FullFeaturedCrudGrid() {
   // Cargar datos de Firestore
   useEffect(() => {
     const fetchCitas = async () => {
-      const citas = await readItems(objectData.uid);
+      const citas = await readItemsEdgar(objectData.uid);
       setRows(citas); // Actualiza las filas con los datos de Firestore
     };
     fetchCitas();
@@ -71,8 +71,8 @@ export default function FullFeaturedCrudGrid() {
   const handleDeleteClick = (id) => () => {
     const itemToDelete = rows.find((row) => row.id === id);
     setRows(rows.filter((row) => row.id !== id));
-    createItem(itemToDelete,"Eliminados");
-    deleteItem(id);
+    createItemEdgar(itemToDelete,"Eliminados");
+    deleteItemEdgar(id);
   };
 
   const handleCancelClick = (id) => () => {
@@ -89,7 +89,7 @@ export default function FullFeaturedCrudGrid() {
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    updateItem(updatedRow.id, updatedRow);
+    updateItemEdgar(updatedRow.id, updatedRow);
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     return updatedRow;
   };
