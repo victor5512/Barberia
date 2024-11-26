@@ -42,7 +42,7 @@ export const loginUserEdgar = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("Usuario iniciado sesión:", user);
-    return true;
+    return user;
   } catch (error) {
     console.error("Error al iniciar sesión:", error.code, error.message);
   }

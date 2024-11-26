@@ -15,7 +15,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom"; // Para la navegación
-import { loginAcc } from "./servicios/firebase";
 import { loginUserEdgar, signInWithGoogleEdgar } from "./servicios/login"; // El método para autenticación
 import fondosesion from "./img/fondosesion.jpg";
 import acceso from "./img/acceso.png";
@@ -67,6 +66,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const user = await loginUserEdgar(email, password);
+      console.log("user",user)
       if (user) {
         setSnackbarSeverity("success");
         setSnackbarMessage("Inicio de sesión exitoso");
